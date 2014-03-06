@@ -48,5 +48,21 @@ describe('Venue model', function() {
 	done();
       });
     });
+
+    it('should save venue without capacity', function(done) {
+      var venue = new Venue({ name: 'Maracana', location: 'Rio de Janeiro' });
+      venue.save(function(err) {
+	expect(err).to.not.exist;
+	done();
+      });
+    });
+
+    it('should return error for saving with bad capacity', function(done) {
+      var venue = new Venue({ name: 'Maracana', location: '', capacity: 'hola' });
+      venue.save(function(err) {
+	expect(err).to.exist;
+	done();
+      });
+    });
   });
 });
