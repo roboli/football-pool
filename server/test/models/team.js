@@ -46,10 +46,8 @@ describe('Team model', function() {
     it('should save team with default rank cero', function(done) {
       var team = new Team({ name: 'Nigeria' });
       team.save(function(err) {
-	Team.findOne({ name: 'Nigeria' }, 'rank', function(err, obj) {
-	  expect(obj.rank).to.equal(0);
-	  done();
-	});
+	expect(team.rank).to.equal(0);
+	done();
       });
     });
   });

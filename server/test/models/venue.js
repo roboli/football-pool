@@ -70,10 +70,8 @@ describe('Venue model', function() {
     it('should save venue with default capacity cero', function(done) {
       var venue = new Venue({ name: 'Maracana', location: 'Rio de Janeiro' });
       venue.save(function(err) {
-	Venue.findOne({ name: 'Maracana' }, 'capacity', function(err, obj) {
-	  expect(obj.capacity).to.equal(0);
-	  done();
-	});
+	expect(venue.capacity).to.equal(0);
+	done();
       });
     });
   });
