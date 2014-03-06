@@ -32,5 +32,13 @@ describe('Team model', function() {
 	done();
       });
     });
+
+    it('should save team without rank', function(done) {
+      var team = new Team({ name: 'Spain' });
+      team.save(function(err) {
+	expect(err).to.not.exist;
+	done();
+      });
+    });
   });
 });
