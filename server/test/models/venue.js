@@ -32,5 +32,21 @@ describe('Venue model', function() {
 	done();
       });
     });
+       
+    it('should return error for saving without location', function(done) {
+      var venue = new Venue({ name: 'Maracana', capacity: 99000 });
+      venue.save(function(err) {
+	expect(err).to.exist;
+	done();
+      });
+    });
+
+    it('should return error for saving with empty location', function(done) {
+      var venue = new Venue({ name: 'Maracana', location: '', capacity: 99000 });
+      venue.save(function(err) {
+	expect(err).to.exist;
+	done();
+      });
+    });
   });
 });
