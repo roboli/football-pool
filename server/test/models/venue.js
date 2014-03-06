@@ -4,6 +4,10 @@ var Venue = require('../../lib/models/venue.js');
 var mongoose = require('mongoose');
 
 describe('Venue model', function() {
+  beforeEach(function(done) {
+    mongoose.connection.collections.venues.remove(done);
+  });
+  
   describe('test validations', function() {
     it('should save venue', function(done) {
       var venue = new Venue({ name: 'Maracana', location: 'Rio de Janeiro', capacity: 99000 });
