@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 
 var VenueSchema = new mongoose.Schema({
-  name: String,
+  name: { type: String, required: true },
   location: String,
   capacity: Number
 });
