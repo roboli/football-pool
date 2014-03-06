@@ -1,0 +1,11 @@
+{
+  "application": {
+    "name": "football-pool",
+    "tournament": {
+      "name": "FIFA World Cup 2014",
+      "location": "Brazil",
+      "startDate": "2014-06-12T13:00:00-03:00",
+      "endDate": "2014-07-13T13:00:00-03:00"
+    }
+  }
+}
