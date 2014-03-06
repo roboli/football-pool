@@ -16,5 +16,21 @@ describe('Team model', function() {
 	done();
       });
     });
+
+    it('should return error for saving without name', function(done) {
+      var team = new Team({ rank: 20 });
+      team.save(function(err) {
+	expect(err).to.exist;
+	done();
+      });
+    });
+
+    it('should return error for saving with empty name', function(done) {
+      var team = new Team({ name: '', rank: 30 });
+      team.save(function(err) {
+	expect(err).to.exist;
+	done();
+      });
+    });
   });
 });
