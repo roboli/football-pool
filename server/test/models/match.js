@@ -42,8 +42,23 @@ describe('Match model', function() {
     it('should save match', function(done) {
       var match = new Match({ _venue: venue._id, _home_team: teams[0]._id, _visitor_team: teams[1]._id, date: new Date() });
       match.save(function(err) {
-	console.log(match);
 	expect(err).to.not.exist;
+	done();
+      });
+    });
+
+    it('should return error for saving with no venue', function(done) {
+      var match = new Match({ _home_team: teams[0]._id, _visitor_team: teams[1]._id, date: new Date() });
+      match.save(function(err) {
+	expect(err).to.exist;
+	done();
+      });
+    });
+
+    it('should return error for saving with bad venue', function(done) {
+      var match = new Match({ _venue: '13848', _home_team: teams[0]._id, _visitor_team: teams[1]._id, date: new Date() });
+      match.save(function(err) {
+	expect(err).to.exist;
 	done();
       });
     });
