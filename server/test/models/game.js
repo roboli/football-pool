@@ -2,11 +2,11 @@ var expect = require('chai').expect;
 var db = require('../../lib/db');
 var Venue = require('../../lib/models/venue');
 var Team = require('../../lib/models/team');
-var Match = require('../../lib/models/match');
+var Game = require('../../lib/models/game');
 var mongoose = require('mongoose');
 var async = require('async');
 
-describe('Match model', function() {
+describe('Game model', function() {
   var venue;
   var teams = [];
 
@@ -15,7 +15,7 @@ describe('Match model', function() {
 
     async.waterfall([
       function(cb) {
-	collections.matches.remove(cb);
+	collections.games.remove(cb);
       },
       function(affected, cb) {
 	collections.venues.remove(cb);
@@ -39,73 +39,73 @@ describe('Match model', function() {
   });
   
   describe('test validations', function() {
-    it('should save match', function(done) {
-      var match = new Match({ _venue: venue._id, _home_team: teams[0]._id, _visitor_team: teams[1]._id, date: new Date() });
-      match.save(function(err) {
+    it('should save game', function(done) {
+      var game = new Game({ _venue: venue._id, _home_team: teams[0]._id, _away_team: teams[1]._id, date: new Date() });
+      game.save(function(err) {
 	expect(err).to.not.exist;
 	done();
       });
     });
 
     it('should return error for saving with no venue', function(done) {
-      var match = new Match({ _home_team: teams[0]._id, _visitor_team: teams[1]._id, date: new Date() });
-      match.save(function(err) {
+      var game = new Game({ _home_team: teams[0]._id, _away_team: teams[1]._id, date: new Date() });
+      game.save(function(err) {
 	expect(err).to.exist;
 	done();
       });
     });
 
     it('should return error for saving with bad venue', function(done) {
-      var match = new Match({ _venue: '13848', _home_team: teams[0]._id, _visitor_team: teams[1]._id, date: new Date() });
-      match.save(function(err) {
+      var game = new Game({ _venue: '13848', _home_team: teams[0]._id, _away_team: teams[1]._id, date: new Date() });
+      game.save(function(err) {
 	expect(err).to.exist;
 	done();
       });
     });
 
     it('should return error for saving with no home team', function(done) {
-      var match = new Match({ _venue: venue._id, _visitor_team: teams[1]._id, date: new Date() });
-      match.save(function(err) {
+      var game = new Game({ _venue: venue._id, _away_team: teams[1]._id, date: new Date() });
+      game.save(function(err) {
 	expect(err).to.exist;
 	done();
       });
     });
 
     it('should return error for saving with bad home team', function(done) {
-      var match = new Match({ _venue: venue._id, _home_team: '3244', _visitor_team: teams[1]._id, date: new Date() });
-      match.save(function(err) {
+      var game = new Game({ _venue: venue._id, _home_team: '3244', _away_team: teams[1]._id, date: new Date() });
+      game.save(function(err) {
 	expect(err).to.exist;
 	done();
       });
     });
 
-    it('should return error for saving with no visitor team', function(done) {
-      var match = new Match({ _venue: venue._id, _home_team: teams[1]._id, date: new Date() });
-      match.save(function(err) {
+    it('should return error for saving with no away team', function(done) {
+      var game = new Game({ _venue: venue._id, _home_team: teams[1]._id, date: new Date() });
+      game.save(function(err) {
 	expect(err).to.exist;
 	done();
       });
     });
 
-    it('should return error for saving with bad visitor team', function(done) {
-      var match = new Match({ _venue: venue._id, _home_team: teams[0]._id, _visitor_team: '483949', date: new Date() });
-      match.save(function(err) {
+    it('should return error for saving with bad away team', function(done) {
+      var game = new Game({ _venue: venue._id, _home_team: teams[0]._id, _away_team: '483949', date: new Date() });
+      game.save(function(err) {
 	expect(err).to.exist;
 	done();
       });
     });
 
     it('should return error for saving with no date', function(done) {
-      var match = new Match({ _venue: venue._id, _home_team: teams[0]._id, _visitor_team: teams[1]._id });
-      match.save(function(err) {
+      var game = new Game({ _venue: venue._id, _home_team: teams[0]._id, _away_team: teams[1]._id });
+      game.save(function(err) {
 	expect(err).to.exist;
 	done();
       });
     });
 
     it('should return error for saving with bad date', function(done) {
-      var match = new Match({ _venue: venue._id, _home_team: teams[0]._id, _visitor_team: teams[1]._id, date: '43489hola' });
-      match.save(function(err) {
+      var game = new Game({ _venue: venue._id, _home_team: teams[0]._id, _away_team: teams[1]._id, date: '43489hola' });
+      game.save(function(err) {
 	expect(err).to.exist;
 	done();
       });
