@@ -94,5 +94,21 @@ describe('Match model', function() {
 	done();
       });
     });
+
+    it('should return error for saving with no date', function(done) {
+      var match = new Match({ _venue: venue._id, _home_team: teams[0]._id, _visitor_team: teams[1]._id });
+      match.save(function(err) {
+	expect(err).to.exist;
+	done();
+      });
+    });
+
+    it('should return error for saving with bad date', function(done) {
+      var match = new Match({ _venue: venue._id, _home_team: teams[0]._id, _visitor_team: teams[1]._id, date: '43489hola' });
+      match.save(function(err) {
+	expect(err).to.exist;
+	done();
+      });
+    });
   });
 });
