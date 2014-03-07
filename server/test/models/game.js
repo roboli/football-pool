@@ -1,8 +1,9 @@
+var config = require('./config');
 var expect = require('chai').expect;
-var db = require('../../lib/db');
-var Venue = require('../../lib/models/venue');
-var Team = require('../../lib/models/team');
-var Game = require('../../lib/models/game');
+var db = require(config.lib_path + 'db');
+var Venue = require(config.models_path + 'venue');
+var Team = require(config.models_path + 'team');
+var Game = require(config.models_path + 'game');
 var mongoose = require('mongoose');
 var async = require('async');
 

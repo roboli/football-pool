@@ -1,6 +1,7 @@
+var config = require('./config');
 var expect = require('chai').expect;
-var db = require('../../lib/db');
-var Venue = require('../../lib/models/venue');
+var db = require(config.lib_path + 'db');
+var Venue = require(config.models_path + 'venue');
 var mongoose = require('mongoose');
 
 describe('Venue model', function() {
