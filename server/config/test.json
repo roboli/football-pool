@@ -1,4 +1,7 @@
 {
+  "express": {
+    "port": 8080
+  },
   "mongo": {
     "url": "mongodb://localhost/pool_test"
   }
