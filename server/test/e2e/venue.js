@@ -31,5 +31,15 @@ describe('venue api', function(){
         .expect(hasProperties)
         .expect(201, done);
     });
+
+    it('should respond with 400 for invalid post', function(done) {
+      var badVenue = {};
+
+      request(app)
+        .post('/venue')
+        .send(badVenue)
+        .expect('Content-Type', /json/)
+        .expect(400, done);
+    });
   });
 });
