@@ -1,5 +1,6 @@
 var config = require('../configuration');
+var HttpStatus = require('http-status');
 
 exports.get = function(req, res) {
-  res.json(200, config.get('application:tournament'));
+  res.json(HttpStatus.OK, config.get('application:tournament'));
 };

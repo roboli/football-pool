@@ -1,3 +1,5 @@
+var HttpStatus = require('http-status');
+
 exports.index = function(req, res) {
-  res.json(200, 'Ok');
+  res.json(HttpStatus.OK, HttpStatus[200]);
 };

@@ -1,19 +1,20 @@
 var Venue = require('../models/venue');
+var HttpStatus = require('http-status');
 
 exports.all = function(req, res) {
   Venue.find(function(err, results) {
-    if (err) return res.json(500, 'Internal Server Error');
-    res.json(200, results);
+    if (err) return res.json(HttpStatus.INTERNAL_SERVER_ERROR, HttpStatus[500]);
+    res.json(HttpStatus.OK, results);
   });
 };
 
 exports.get = function(req, res) {
   Venue.findById(req.id, function(err, result) {
-    if (err) return res.json(500, 'Internal Server Error');
+    if (err) return res.json(HttpStatus.INTERNAL_SERVER_ERROR, HttpStatus[500]);
     if (!result) {
-      res.json(404, 'Not Found');
+      res.json(HttpStatus.NOT_FOUND, HttpStatus[404]);
     } else {
-      res.json(200, result);
+      res.json(HttpStatus.OK, result);
     }
   });
 };
@@ -24,12 +25,12 @@ exports.post = function(req, res) {
   venue.save(function(err) {
     if (err) {
       if (err.name == 'ValidationError') {
-	return res.json(400, err);
+	return res.json(HttpStatus.BAD_REQUEST, err);
       } else {
-	return res.json(500, 'Internal Server Error');
+	return res.json(HttpStatus.INTERNAL_SERVER_ERROR, HttpStatus[500]);
       }
     }
     
-    res.json(201, venue);    
+    res.json(HttpStatus.CREATED, venue);    
   });
 };
