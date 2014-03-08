@@ -9,7 +9,7 @@ exports.all = function(req, res) {
 };
 
 exports.get = function(req, res) {
-  Venue.findById(req.id, function(err, result) {
+  Venue.findById(req.params.id, function(err, result) {
     if (err) return res.json(HttpStatus.INTERNAL_SERVER_ERROR, HttpStatus[500]);
     if (!result) {
       res.json(HttpStatus.NOT_FOUND, HttpStatus[404]);

@@ -70,6 +70,14 @@ describe('Venue API', function(){
         .expect(200, done);
     });
 
+    it('should respond with 200 for valid id', function(done) {
+      request(app)
+        .get('/venue/' + id)
+        .expect('Content-Type', /json/)
+        .expect(function(res) { hasProperties(res.body, venues[0]); })
+        .expect(200, done);
+    });
+
     it('should respond with 404 for missing resource', function(done){
       request(app)
         .get('/venue/123456789012345678901234')
