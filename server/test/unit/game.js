@@ -40,6 +40,7 @@ describe('Game model', function() {
   });
   
   describe('test validations', function() {
+    
     it('should save game', function(done) {
       var game = new Game({ _venue: venue._id, _home_team: teams[0]._id, _away_team: teams[1]._id, date: new Date() });
       game.save(function(err) {

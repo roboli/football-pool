@@ -5,11 +5,13 @@ var Venue = require(config.models_path + 'venue');
 var mongoose = require('mongoose');
 
 describe('Venue model', function() {
+  
   beforeEach(function(done) {
     mongoose.connection.collections.venues.remove(done);
   });
   
   describe('test validations', function() {
+    
     it('should save venue', function(done) {
       var venue = new Venue({ name: 'Maracana', location: 'Rio de Janeiro', capacity: 99000 });
       venue.save(function(err) {
@@ -68,6 +70,7 @@ describe('Venue model', function() {
   });
 
   describe('test defaults', function() {
+    
     it('should save venue with default capacity cero', function(done) {
       var venue = new Venue({ name: 'Maracana', location: 'Rio de Janeiro' });
       venue.save(function(err) {

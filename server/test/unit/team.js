@@ -5,11 +5,13 @@ var Team = require(config.models_path + 'team');
 var mongoose = require('mongoose');
 
 describe('Team model', function() {
+  
   beforeEach(function(done) {
     mongoose.connection.collections.teams.remove(done);
   });
   
   describe('test validations', function() {
+    
     it('should save team', function(done) {
       var team = new Team({ name: 'Brazil', rank: 2 });
       team.save(function(err) {
@@ -44,6 +46,7 @@ describe('Team model', function() {
   });
 
   describe('test defaults', function() {
+    
     it('should save team with default rank cero', function(done) {
       var team = new Team({ name: 'Nigeria' });
       team.save(function(err) {
