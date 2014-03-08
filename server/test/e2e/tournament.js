@@ -8,10 +8,9 @@ describe('tournament api', function(){
   describe('when requesting resource /tournament', function(){
 
     function hasProperties(res) {
-      var tournament = JSON.parse(res.text);
-      expect(tournament.name).to.exist;
-      expect(tournament.startDate).to.exist;
-      expect(tournament.endDate).to.exist;
+      expect(res.body.name).to.exist;
+      expect(res.body.startDate).to.exist;
+      expect(res.body.endDate).to.exist;
     }
     
     it('should respond with 200', function(done){
