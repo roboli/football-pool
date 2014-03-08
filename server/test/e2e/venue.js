@@ -24,7 +24,7 @@ describe('Venue API', function(){
       expect(res.body.capacity).to.equal(venue.capacity);
     }
     
-    it('should respond with 201 with valid data', function(done){
+    it('should respond with 201 for valid data', function(done){
       request(app)
         .post('/venue')
         .send(venue)
@@ -33,7 +33,7 @@ describe('Venue API', function(){
         .expect(201, done);
     });
 
-    it('should respond with 400 with invalid data', function(done) {
+    it('should respond with 400 for invalid data', function(done) {
       var badVenue = {};
 
       request(app)

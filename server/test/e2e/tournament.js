@@ -3,9 +3,9 @@ var app = require(config.root_path + 'app');
 var request = require('supertest');
 var expect = require('chai').expect;
 
-describe('tournament api', function(){
+describe('Tournament API', function(){
 
-  describe('when requesting resource /tournament', function(){
+  describe('test get', function(){
 
     function hasProperties(res) {
       expect(res.body.name).to.exist;
