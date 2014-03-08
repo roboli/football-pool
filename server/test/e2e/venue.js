@@ -18,6 +18,7 @@ describe('venue api', function(){
     };
 
     function hasProperties(res) {
+      expect(res.body._id).to.exist;
       expect(res.body.name).to.equal(venue.name);
       expect(res.body.location).to.equal(venue.location);
       expect(res.body.capacity).to.equal(venue.capacity);
