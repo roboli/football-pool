@@ -72,7 +72,7 @@ describe('Venue API', function(){
 
     it('should respond with 404 for missing resource', function(done){
       request(app)
-        .get('/venue/111222333444555')
+        .get('/venue/123456789012345678901234')
         .expect('Content-Type', /json/)
         .expect(404, done);
     });
