@@ -69,5 +69,12 @@ describe('Venue API', function(){
         .expect(function(res) { hasProperties(res.body[0], venues[0]); })
         .expect(200, done);
     });
+
+    it('should respond with 404 for missing resource', function(done){
+      request(app)
+        .get('/venue/111222333444555')
+        .expect('Content-Type', /json/)
+        .expect(404, done);
+    });
   });
 });

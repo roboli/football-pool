@@ -7,6 +7,17 @@ exports.all = function(req, res) {
   });
 };
 
+exports.get = function(req, res) {
+  Venue.findById(req.id, function(err, result) {
+    if (err) return res.json(500, 'Internal Server Error');
+    if (!result) {
+      res.json(404, 'Not Found');
+    } else {
+      res.json(200, result);
+    }
+  });
+};
+
 exports.post = function(req, res) {
   var venue = new Venue(req.body);
 
