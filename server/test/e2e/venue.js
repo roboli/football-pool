@@ -4,13 +4,13 @@ var request = require('supertest');
 var expect = require('chai').expect;
 var mongoose = require('mongoose');
 
-describe('venue api', function(){
+describe('Venue API', function(){
 
   beforeEach(function(done) {
     mongoose.connection.collections.venues.remove(done);
   });
 
-  describe('when creating a new resource /venue', function(){
+  describe('testing post', function(){
     var venue = {
       name: "Maracana",
       location: "Rio de Janeiro",  
@@ -24,7 +24,7 @@ describe('venue api', function(){
       expect(res.body.capacity).to.equal(venue.capacity);
     }
     
-    it('should respond with 201', function(done){
+    it('should respond with 201 with valid data', function(done){
       request(app)
         .post('/venue')
         .send(venue)
@@ -33,7 +33,7 @@ describe('venue api', function(){
         .expect(201, done);
     });
 
-    it('should respond with 400 for invalid post', function(done) {
+    it('should respond with 400 with invalid data', function(done) {
       var badVenue = {};
 
       request(app)
