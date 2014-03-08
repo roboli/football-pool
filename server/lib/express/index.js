@@ -9,6 +9,7 @@ app.use(express.bodyParser());
 app.set('port', config.get('express:port'));
 app.get('/heartbeat', routes.heartbeat.index);
 app.get('/tournament', routes.tournament.get);
+app.get('/venue', routes.venue.all);
 app.post('/venue', routes.venue.post);
 app.use(notFound.index);
 

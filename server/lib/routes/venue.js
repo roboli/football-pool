@@ -1,5 +1,12 @@
 var Venue = require('../models/venue');
 
+exports.all = function(req, res) {
+  Venue.find(function(err, results) {
+    if (err) return res.json(500, 'Internal Server Error');
+    res.json(200, results);
+  });
+};
+
 exports.post = function(req, res) {
   var venue = new Venue(req.body);
 

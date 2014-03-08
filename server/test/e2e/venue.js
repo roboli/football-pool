@@ -10,6 +10,13 @@ describe('Venue API', function(){
     mongoose.connection.collections.venues.remove(done);
   });
 
+  function hasProperties(obj, exp) {
+    expect(obj._id).to.exist;
+    expect(obj.name).to.equal(exp.name);
+    expect(obj.location).to.equal(exp.location);
+    expect(obj.capacity).to.equal(exp.capacity);
+  }
+
   describe('testing post', function(){
     var venue = {
       name: "Maracana",
@@ -17,19 +24,12 @@ describe('Venue API', function(){
       capacity: 99000
     };
 
-    function hasProperties(res) {
-      expect(res.body._id).to.exist;
-      expect(res.body.name).to.equal(venue.name);
-      expect(res.body.location).to.equal(venue.location);
-      expect(res.body.capacity).to.equal(venue.capacity);
-    }
-    
     it('should respond with 201 for valid data', function(done){
       request(app)
         .post('/venue')
         .send(venue)
         .expect('Content-Type', /json/)
-        .expect(hasProperties)
+        .expect(function(res) { hasProperties(res.body, venue); })
         .expect(201, done);
     });
 
@@ -41,6 +41,33 @@ describe('Venue API', function(){
         .send(badVenue)
         .expect('Content-Type', /json/)
         .expect(400, done);
+    });
+  });
+
+  describe('test get', function() {
+    var id;
+    var venues = [
+      { name: "Maracana",
+	location: "Rio de Janeiro",
+	capacity: 99000 },
+      { name: "Camp Nou",
+	location: "Barcelona",
+	capacity: 98000 }
+    ];
+    
+    beforeEach(function(done) {
+      mongoose.connection.collections.venues.insert(venues, function(err, results) {
+	id = results[0]._id;
+	done();
+      });
+    });
+
+    it('should respond with 200 for get all', function(done){
+      request(app)
+        .get('/venue')
+        .expect('Content-Type', /json/)
+        .expect(function(res) { hasProperties(res.body[0], venues[0]); })
+        .expect(200, done);
     });
   });
 });
