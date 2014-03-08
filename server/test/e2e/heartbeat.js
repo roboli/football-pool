@@ -12,7 +12,7 @@ describe('Heartbeat API', function(){
         .expect(200, done);
     });
     
-    it('should respond with 404 for invalid resource', function(done){
+    it('should respond with 404 for missing resource', function(done){
       request(app)
         .get('/missing')
         .expect('Content-Type', /json/)
