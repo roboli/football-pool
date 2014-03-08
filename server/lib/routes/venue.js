@@ -34,3 +34,14 @@ exports.post = function(req, res) {
     res.json(HttpStatus.CREATED, venue);    
   });
 };
+
+exports.put = function(req, res) {
+  Venue.findByIdAndUpdate(req.params.id, res.body, function(err, result) {
+    if (err) return res.json(HttpStatus.INTERNAL_SERVER_ERROR, HttpStatus[500]);
+    if (!result) {
+      res.json(HttpStatus.NOT_FOUND, HttpStatus[404]);
+    } else {
+      res.json(HttpStatus.NO_CONTENT, HttpStatus[204]);
+    }
+  });
+};

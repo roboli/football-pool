@@ -17,7 +17,7 @@ describe('Venue API', function(){
     expect(obj.capacity).to.equal(exp.capacity);
   }
 
-  describe('testing post', function(){
+  describe('test post', function(){
     var venue = {
       name: "Maracana",
       location: "Rio de Janeiro",  
@@ -90,6 +90,29 @@ describe('Venue API', function(){
         .get('/venue/434u')
         .expect('Content-Type', /json/)
         .expect(400, done);
+    });
+  });
+
+  describe('test put', function() {
+    var id;
+    var venue = {
+      name: "Maracana",
+      location: "Rio de Janeiro",  
+      capacity: 99000
+    };
+
+    beforeEach(function(done) {
+      mongoose.connection.collections.venues.insert(venue, function(err, results) {
+	id = results[0]._id;
+	done();
+      });
+    });
+
+    it('should respond with 204 for valid id', function(done){
+       request(app)
+        .put('/venue/' + id)
+        .send({ name: 'Santiago Bernabeu', location: 'Madrid', capacity: 89000 })
+        .expect(204, done); 
     });
   });
 });
