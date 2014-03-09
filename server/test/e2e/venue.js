@@ -117,6 +117,7 @@ describe('Venue API', function(){
       request(app)
         .put('/venue/' + id)
         .send(otherVenue)
+        .expect('Content-Type', /json/)
         .expect(204)
         .end(function(err, res) {
 	  request(app)
