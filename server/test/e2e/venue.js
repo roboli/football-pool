@@ -151,4 +151,33 @@ describe('Venue API', function(){
         .expect(400, done);
     });
   });
+
+  describe('test del', function(){
+    var id;
+    var venue = {
+      name: "Maracana",
+      location: "Rio de Janeiro",  
+      capacity: 99000
+    };
+
+    beforeEach(function(done) {
+      mongoose.connection.collections.venues.insert(venue, function(err, results) {
+	id = results[0]._id;
+	done();
+      });
+    });
+    
+    it('should respond with 204 for valid id', function(done){
+       request(app)
+        .del('/venue/' + id)
+        .expect(204)
+        .end(function(err, res) {
+	  if (err) throw err; // Checking for ECONNRESET error
+	  request(app)
+            .get('/venue/' + id)
+            .expect('Content-Type', /json/)
+            .expect(404, done);
+	});
+    });
+  });
 });

@@ -15,6 +15,7 @@ app.get('/venue', routes.venue.all);
 app.get('/venue/:id', routes.venue.get);
 app.post('/venue', routes.venue.post);
 app.put('/venue/:id', routes.venue.put);
+app.del('/venue/:id', routes.venue.del);
 app.use(notFound.index);
 
 http.createServer(app).listen(app.get('port'));
