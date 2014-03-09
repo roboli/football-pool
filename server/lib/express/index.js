@@ -16,6 +16,11 @@ app.get('/venue/:id', routes.venue.get);
 app.post('/venue', routes.venue.post);
 app.put('/venue/:id', routes.venue.put);
 app.del('/venue/:id', routes.venue.del);
+app.get('/team', routes.team.all);
+app.get('/team/:id', routes.team.get);
+app.post('/team', routes.team.post);
+app.put('/team/:id', routes.team.put);
+app.del('/team/:id', routes.team.del);
 app.use(notFound.index);
 
 http.createServer(app).listen(app.get('port'));
