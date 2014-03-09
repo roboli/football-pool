@@ -21,6 +21,11 @@ app.get('/team/:id', routes.team.get);
 app.post('/team', routes.team.post);
 app.put('/team/:id', routes.team.put);
 app.del('/team/:id', routes.team.del);
+app.get('/game', routes.game.all);
+app.get('/game/:id', routes.game.get);
+app.post('/game', routes.game.post);
+app.put('/game/:id', routes.game.put);
+app.del('/game/:id', routes.game.del);
 app.use(notFound.index);
 
 http.createServer(app).listen(app.get('port'));
