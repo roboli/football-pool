@@ -109,10 +109,22 @@ describe('Venue API', function(){
     });
 
     it('should respond with 204 for valid id', function(done){
-       request(app)
+      var otherVenue = {
+	name: 'Santiago Bernabeu',
+	location: 'Madrid',
+	capacity: 89000
+      };
+      
+      request(app)
         .put('/venue/' + id)
-        .send({ name: 'Santiago Bernabeu', location: 'Madrid', capacity: 89000 })
-        .expect(204, done); 
+        .send(otherVenue)
+        .expect(204)
+        .end(function(err, res) {
+	  request(app)
+            .get('/venue/' + id)
+            .expect(function(res) { hasProperties(res.body, otherVenue); })
+            .end(done);
+	});
     });
   });
 });
