@@ -100,6 +100,11 @@ describe('Venue API', function(){
       location: "Rio de Janeiro",  
       capacity: 99000
     };
+    var otherVenue = {
+      name: 'Santiago Bernabeu',
+      location: 'Madrid',
+      capacity: 89000
+    };
 
     beforeEach(function(done) {
       mongoose.connection.collections.venues.insert(venue, function(err, results) {
@@ -109,12 +114,6 @@ describe('Venue API', function(){
     });
 
     it('should respond with 204 for valid id', function(done){
-      var otherVenue = {
-	name: 'Santiago Bernabeu',
-	location: 'Madrid',
-	capacity: 89000
-      };
-      
       request(app)
         .put('/venue/' + id)
         .send(otherVenue)
@@ -125,6 +124,14 @@ describe('Venue API', function(){
             .expect(function(res) { hasProperties(res.body, otherVenue); })
             .end(done);
 	});
+    });
+
+    it('should respond with 404 for missing resource', function(done){
+      request(app)
+        .put('/venue/123456789012345678901234')
+        .send(otherVenue)
+        .expect('Content-Type', /json/)
+        .expect(404, done);
     });
   });
 });
