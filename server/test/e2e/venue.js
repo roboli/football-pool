@@ -134,5 +134,13 @@ describe('Venue API', function(){
         .expect('Content-Type', /json/)
         .expect(404, done);
     });
+
+    it('should respond with 400 for invalid id', function(done){
+      request(app)
+        .put('/venue/434u')
+        .send(otherVenue)
+        .expect('Content-Type', /json/)
+        .expect(400, done);
+    });
   });
 });
