@@ -179,5 +179,19 @@ describe('Venue API', function(){
             .expect(404, done);
 	});
     });
+
+    it('should respond with 404 for missing resource', function(done){
+      request(app)
+        .del('/venue/123456789012345678901234')
+        .expect('Content-Type', /json/)
+        .expect(404, done);
+    });
+
+    it('should respond with 400 for invalid id', function(done){
+      request(app)
+        .del('/venue/434u')
+        .expect('Content-Type', /json/)
+        .expect(400, done);
+    });
   });
 });
