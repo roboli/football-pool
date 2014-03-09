@@ -113,7 +113,7 @@ describe('Venue API', function(){
       });
     });
 
-    it('should respond with 204 for valid id', function(done){
+    it('should respond with 204 for valid id and data', function(done){
       request(app)
         .put('/venue/' + id)
         .send(otherVenue)
@@ -139,6 +139,14 @@ describe('Venue API', function(){
       request(app)
         .put('/venue/434u')
         .send(otherVenue)
+        .expect('Content-Type', /json/)
+        .expect(400, done);
+    });
+
+    it('should respond with 400 for invalid data', function(done){
+      request(app)
+        .put('/venue/' + id)
+        .send({ name: 'Mestalla' })
         .expect('Content-Type', /json/)
         .expect(400, done);
     });

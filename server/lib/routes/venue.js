@@ -36,12 +36,27 @@ exports.post = function(req, res) {
 };
 
 exports.put = function(req, res) {
-  Venue.findByIdAndUpdate(req.params.id, req.body, function(err, result) {
+  Venue.findById(req.params.id, function(err, result) {
     if (err) return res.json(HttpStatus.INTERNAL_SERVER_ERROR, HttpStatus[500]);
+    
     if (!result) {
       res.json(HttpStatus.NOT_FOUND, HttpStatus[404]);
     } else {
-      res.json(HttpStatus.NO_CONTENT, HttpStatus[204]);
+      result.name = req.body.name;
+      result.location = req.body.location;
+      result.capacity = req.body.capacity;
+
+      result.save(function(err) {
+	if (err) {
+	  if (err.name == 'ValidationError') {
+	    return res.json(HttpStatus.BAD_REQUEST, err);
+	  } else {
+	    return res.json(HttpStatus.INTERNAL_SERVER_ERROR, HttpStatus[500]);
+	  }
+	}
+
+	res.json(HttpStatus.NO_CONTENT, HttpStatus[204]);
+      });
     }
   });
 };
