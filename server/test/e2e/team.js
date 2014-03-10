@@ -3,6 +3,7 @@ var app = require(config.root_path + 'app');
 var request = require('supertest');
 var expect = require('chai').expect;
 var mongoose = require('mongoose');
+var supertest = request(app);
 
 describe('Team API', function(){
 
@@ -23,7 +24,7 @@ describe('Team API', function(){
     };
 
     it('should respond with 201 for valid data', function(done){
-      request(app)
+      supertest
         .post('/team')
         .send(team)
         .expect('Content-Type', /json/)
@@ -34,7 +35,7 @@ describe('Team API', function(){
     it('should respond with 400 for invalid data', function(done) {
       var badTeam = {};
 
-      request(app)
+      supertest
         .post('/team')
         .send(badTeam)
         .expect('Content-Type', /json/)
@@ -59,7 +60,7 @@ describe('Team API', function(){
     });
 
     it('should respond with 200 for get all', function(done){
-      request(app)
+      supertest
         .get('/team')
         .expect('Content-Type', /json/)
         .expect(function(res) { hasProperties(res.body[0], teams[0]); })
@@ -67,7 +68,7 @@ describe('Team API', function(){
     });
 
     it('should respond with 200 for valid id', function(done) {
-      request(app)
+      supertest
         .get('/team/' + id)
         .expect('Content-Type', /json/)
         .expect(function(res) { hasProperties(res.body, teams[0]); })
@@ -75,14 +76,14 @@ describe('Team API', function(){
     });
 
     it('should respond with 404 for missing resource', function(done){
-      request(app)
+      supertest
         .get('/team/123456789012345678901234')
         .expect('Content-Type', /json/)
         .expect(404, done);
     });
 
     it('should respond with 400 for invalid id', function(done){
-      request(app)
+      supertest
         .get('/team/434u')
         .expect('Content-Type', /json/)
         .expect(400, done);
@@ -108,13 +109,13 @@ describe('Team API', function(){
     });
 
     it('should respond with 204 for valid id and data', function(done){
-      request(app)
+      supertest
         .put('/team/' + id)
         .send(otherTeam)
         .expect('Content-Type', /json/)
         .expect(204)
         .end(function(err, res) {
-	  request(app)
+	  supertest
             .get('/team/' + id)
             .expect(function(res) { hasProperties(res.body, otherTeam); })
             .end(done);
@@ -122,7 +123,7 @@ describe('Team API', function(){
     });
 
     it('should respond with 404 for missing resource', function(done){
-      request(app)
+      supertest
         .put('/team/123456789012345678901234')
         .send(otherTeam)
         .expect('Content-Type', /json/)
@@ -130,7 +131,7 @@ describe('Team API', function(){
     });
 
     it('should respond with 400 for invalid id', function(done){
-      request(app)
+      supertest
         .put('/team/434u')
         .send(otherTeam)
         .expect('Content-Type', /json/)
@@ -138,7 +139,7 @@ describe('Team API', function(){
     });
 
     it('should respond with 400 for invalid data', function(done){
-      request(app)
+      supertest
         .put('/team/' + id)
         .send({ rank: 33 })
         .expect('Content-Type', /json/)
@@ -161,12 +162,12 @@ describe('Team API', function(){
     });
     
     it('should respond with 204 for valid id', function(done){
-       request(app)
+       supertest
         .del('/team/' + id)
         .expect(204)
         .end(function(err, res) {
 	  if (err) throw err; // Checking for ECONNRESET error
-	  request(app)
+	  supertest
             .get('/team/' + id)
             .expect('Content-Type', /json/)
             .expect(404, done);
@@ -174,14 +175,14 @@ describe('Team API', function(){
     });
 
     it('should respond with 404 for missing resource', function(done){
-      request(app)
+      supertest
         .del('/team/123456789012345678901234')
         .expect('Content-Type', /json/)
         .expect(404, done);
     });
 
     it('should respond with 400 for invalid id', function(done){
-      request(app)
+      supertest
         .del('/team/434u')
         .expect('Content-Type', /json/)
         .expect(400, done);

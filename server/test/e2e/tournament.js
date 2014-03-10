@@ -2,6 +2,7 @@ var config = require('./config');
 var app = require(config.root_path + 'app');
 var request = require('supertest');
 var expect = require('chai').expect;
+var supertest = request(app);
 
 describe('Tournament API', function(){
 
@@ -14,7 +15,7 @@ describe('Tournament API', function(){
     }
     
     it('should respond with 200', function(done){
-      request(app)
+      supertest
         .get('/tournament')
         .expect('Content-Type', /json/)
         .expect(hasProperties)

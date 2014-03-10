@@ -3,6 +3,7 @@ var app = require(config.root_path + 'app');
 var request = require('supertest');
 var expect = require('chai').expect;
 var mongoose = require('mongoose');
+var supertest = request(app);
 
 describe('Venue API', function(){
 
@@ -25,7 +26,7 @@ describe('Venue API', function(){
     };
 
     it('should respond with 201 for valid data', function(done){
-      request(app)
+      supertest
         .post('/venue')
         .send(venue)
         .expect('Content-Type', /json/)
@@ -36,7 +37,7 @@ describe('Venue API', function(){
     it('should respond with 400 for invalid data', function(done) {
       var badVenue = {};
 
-      request(app)
+      supertest
         .post('/venue')
         .send(badVenue)
         .expect('Content-Type', /json/)
@@ -63,7 +64,7 @@ describe('Venue API', function(){
     });
 
     it('should respond with 200 for get all', function(done){
-      request(app)
+      supertest
         .get('/venue')
         .expect('Content-Type', /json/)
         .expect(function(res) { hasProperties(res.body[0], venues[0]); })
@@ -71,7 +72,7 @@ describe('Venue API', function(){
     });
 
     it('should respond with 200 for valid id', function(done) {
-      request(app)
+      supertest
         .get('/venue/' + id)
         .expect('Content-Type', /json/)
         .expect(function(res) { hasProperties(res.body, venues[0]); })
@@ -79,14 +80,14 @@ describe('Venue API', function(){
     });
 
     it('should respond with 404 for missing resource', function(done){
-      request(app)
+      supertest
         .get('/venue/123456789012345678901234')
         .expect('Content-Type', /json/)
         .expect(404, done);
     });
 
     it('should respond with 400 for invalid id', function(done){
-      request(app)
+      supertest
         .get('/venue/434u')
         .expect('Content-Type', /json/)
         .expect(400, done);
@@ -114,13 +115,13 @@ describe('Venue API', function(){
     });
 
     it('should respond with 204 for valid id and data', function(done){
-      request(app)
+      supertest
         .put('/venue/' + id)
         .send(otherVenue)
         .expect('Content-Type', /json/)
         .expect(204)
         .end(function(err, res) {
-	  request(app)
+	  supertest
             .get('/venue/' + id)
             .expect(function(res) { hasProperties(res.body, otherVenue); })
             .end(done);
@@ -128,7 +129,7 @@ describe('Venue API', function(){
     });
 
     it('should respond with 404 for missing resource', function(done){
-      request(app)
+      supertest
         .put('/venue/123456789012345678901234')
         .send(otherVenue)
         .expect('Content-Type', /json/)
@@ -136,7 +137,7 @@ describe('Venue API', function(){
     });
 
     it('should respond with 400 for invalid id', function(done){
-      request(app)
+      supertest
         .put('/venue/434u')
         .send(otherVenue)
         .expect('Content-Type', /json/)
@@ -144,7 +145,7 @@ describe('Venue API', function(){
     });
 
     it('should respond with 400 for invalid data', function(done){
-      request(app)
+      supertest
         .put('/venue/' + id)
         .send({ name: 'Mestalla' })
         .expect('Content-Type', /json/)
@@ -168,12 +169,12 @@ describe('Venue API', function(){
     });
     
     it('should respond with 204 for valid id', function(done){
-       request(app)
+       supertest
         .del('/venue/' + id)
         .expect(204)
         .end(function(err, res) {
 	  if (err) throw err; // Checking for ECONNRESET error
-	  request(app)
+	  supertest
             .get('/venue/' + id)
             .expect('Content-Type', /json/)
             .expect(404, done);
@@ -181,14 +182,14 @@ describe('Venue API', function(){
     });
 
     it('should respond with 404 for missing resource', function(done){
-      request(app)
+      supertest
         .del('/venue/123456789012345678901234')
         .expect('Content-Type', /json/)
         .expect(404, done);
     });
 
     it('should respond with 400 for invalid id', function(done){
-      request(app)
+      supertest
         .del('/venue/434u')
         .expect('Content-Type', /json/)
         .expect(400, done);
