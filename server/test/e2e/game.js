@@ -4,6 +4,7 @@ var request = require('supertest');
 var expect = require('chai').expect;
 var mongoose = require('mongoose');
 var async = require('async');
+var supertest = request(app);
 
 describe('Game API', function(){
   var _venue;
@@ -60,7 +61,7 @@ describe('Game API', function(){
 	"date": new Date('2014-06-01T13:00:00-03:00')
       };
 
-      request(app)
+      supertest
         .post('/game')
         .send(game)
         .expect('Content-Type', /json/)
@@ -71,7 +72,7 @@ describe('Game API', function(){
     it('should respond with 400 for invalid data', function(done) {
       var badGame = {};
 
-      request(app)
+      supertest
         .post('/game')
         .send(badGame)
         .expect('Content-Type', /json/)
@@ -102,7 +103,7 @@ describe('Game API', function(){
     });
 
     it('should respond with 200 for get all', function(done){
-      request(app)
+      supertest
         .get('/game')
         .expect('Content-Type', /json/)
         .expect(function(res) { expect(res.body[1]._home_team._id).to.equal(games[1]._home_team.toString()); })
@@ -110,7 +111,7 @@ describe('Game API', function(){
     });
 
     it('should respond with 200 for valid id', function(done) {
-      request(app)
+      supertest
         .get('/game/' + id)
         .expect('Content-Type', /json/)
         .expect(function(res) { expect(res.body._home_team._id).to.equal(games[0]._home_team.toString()); })
@@ -118,14 +119,14 @@ describe('Game API', function(){
     });
 
     it('should respond with 404 for missing resource', function(done){
-      request(app)
+      supertest
         .get('/game/123456789012345678901234')
         .expect('Content-Type', /json/)
         .expect(404, done);
     });
 
     it('should respond with 400 for invalid id', function(done){
-      request(app)
+      supertest
         .get('/game/434u')
         .expect('Content-Type', /json/)
         .expect(400, done);
@@ -158,12 +159,12 @@ describe('Game API', function(){
     });
 
     it('should respond with 204 for valid id and data', function(done){
-      request(app)
+      supertest
         .put('/game/' + id)
         .send(otherGame)
         .expect(204)
         .end(function(err, res) {
-	  request(app)
+	  supertest
             .get('/game/' + id)
             .expect(function(res) { expect(res.body._home_team._id).to.equal(otherGame._home_team.toString()); })
             .end(done);
@@ -171,7 +172,7 @@ describe('Game API', function(){
     });
 
     it('should respond with 404 for missing resource', function(done){
-      request(app)
+      supertest
         .put('/game/123456789012345678901234')
         .send(otherGame)
         .expect('Content-Type', /json/)
@@ -179,7 +180,7 @@ describe('Game API', function(){
     });
 
     it('should respond with 400 for invalid id', function(done){
-      request(app)
+      supertest
         .put('/game/434u')
         .send(otherGame)
         .expect('Content-Type', /json/)
@@ -187,7 +188,7 @@ describe('Game API', function(){
     });
 
     it('should respond with 400 for invalid data', function(done){
-      request(app)
+      supertest
         .put('/game/' + id)
         .send({ date: '33ha' })
         .expect('Content-Type', /json/)
@@ -213,12 +214,12 @@ describe('Game API', function(){
     });
     
     it('should respond with 204 for valid id', function(done){
-       request(app)
+       supertest
         .del('/game/' + id)
         .expect(204)
         .end(function(err, res) {
 	  if (err) throw err; // Checking for ECONNRESET error
-	  request(app)
+	  supertest
             .get('/game/' + id)
             .expect('Content-Type', /json/)
             .expect(404, done);
@@ -226,15 +227,15 @@ describe('Game API', function(){
     });
 
     it('should respond with 404 for missing resource', function(done){
-      request(app)
+      supertest
         .del('/game/123456789012345678901234')
         .expect('Content-Type', /json/)
         .expect(404, done);
     });
 
     it('should respond with 400 for invalid id', function(done){
-      request(app)
-        .del('/game/434u')
+      supertest
+        .del('/game/hola')
         .expect('Content-Type', /json/)
         .expect(400, done);
     });
