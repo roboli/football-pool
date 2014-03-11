@@ -15,10 +15,16 @@ module.exports = function(grunt) {
       }
     },
     karma: {
+      options: {
+	configFile: 'test/config/karma.conf.js',	
+      },
       unit: {
-	configFile: 'test/config/karma.conf.js',
+	browsers: ['Firefox', 'Chrome']
+      },
+      continuous: {
 	autoWatch: false,
-	background: true
+	background: true,
+	browsers: ['PhantomJS']
       }
     },
     watch: {
@@ -33,6 +39,6 @@ module.exports = function(grunt) {
     }
   });
   
-  grunt.registerTask('test', [ 'jshint:test', 'karma' ]);
-  grunt.registerTask('test-watch', [ 'jshint:test', 'karma:unit:start', 'watch' ]);
+  grunt.registerTask('test', [ 'jshint:test', 'karma:unit' ]);
+  grunt.registerTask('test-watch', [ 'jshint:test', 'karma:continuous:start', 'watch' ]);
 };
