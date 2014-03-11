@@ -16,15 +16,15 @@ describe('Tournament Resource', function() {
 	"endDate": "2014-07-01T19:00:00-03:00"
       };
       
-      $httpBackend.expectGET('/tournament').respond({
-	data: tournament
-      });
+      $httpBackend.expectGET('/tournament').respond(tournament);
       
       var obj = Tournament.get();
 
       $httpBackend.flush();
 
-      expect(obj.data).toEqual(tournament);
+      expect(obj.name).toEqual(tournament.name);
+      expect(obj.startDate).toEqual(tournament.startDate);
+      expect(obj.endDate).toEqual(tournament.endDate);
     });
   });
 });
