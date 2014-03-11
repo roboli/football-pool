@@ -30,7 +30,7 @@ describe('Venue API', function(){
         .post('/venue')
         .send(venue)
         .expect('Content-Type', /json/)
-        .expect(function(res) { hasProperties(res.body.data, venue); })
+        .expect(function(res) { hasProperties(res.body, venue); })
         .expect(201, done);
     });
 
@@ -67,7 +67,7 @@ describe('Venue API', function(){
       supertest
         .get('/venue')
         .expect('Content-Type', /json/)
-        .expect(function(res) { hasProperties(res.body.data[0], venues[0]); })
+        .expect(function(res) { hasProperties(res.body[0], venues[0]); })
         .expect(200, done);
     });
 
@@ -75,7 +75,7 @@ describe('Venue API', function(){
       supertest
         .get('/venue/' + id)
         .expect('Content-Type', /json/)
-        .expect(function(res) { hasProperties(res.body.data, venues[0]); })
+        .expect(function(res) { hasProperties(res.body, venues[0]); })
         .expect(200, done);
     });
 
@@ -123,7 +123,7 @@ describe('Venue API', function(){
         .end(function(err, res) {
 	  supertest
             .get('/venue/' + id)
-            .expect(function(res) { hasProperties(res.body.data, otherVenue); })
+            .expect(function(res) { hasProperties(res.body, otherVenue); })
             .end(done);
 	});
     });

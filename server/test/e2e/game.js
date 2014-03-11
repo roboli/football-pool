@@ -65,7 +65,7 @@ describe('Game API', function(){
         .post('/game')
         .send(game)
         .expect('Content-Type', /json/)
-        .expect(function(res) { hasProperties(res.body.data, game); })
+        .expect(function(res) { hasProperties(res.body, game); })
         .expect(201, done);
     });
 
@@ -106,7 +106,7 @@ describe('Game API', function(){
       supertest
         .get('/game')
         .expect('Content-Type', /json/)
-        .expect(function(res) { expect(res.body.data[1]._home_team._id).to.equal(games[1]._home_team.toString()); })
+        .expect(function(res) { expect(res.body[1]._home_team._id).to.equal(games[1]._home_team.toString()); })
         .expect(200, done);
     });
 
@@ -114,7 +114,7 @@ describe('Game API', function(){
       supertest
         .get('/game/' + id)
         .expect('Content-Type', /json/)
-        .expect(function(res) { expect(res.body.data._home_team._id).to.equal(games[0]._home_team.toString()); })
+        .expect(function(res) { expect(res.body._home_team._id).to.equal(games[0]._home_team.toString()); })
         .expect(200, done);
     });
 
@@ -166,7 +166,7 @@ describe('Game API', function(){
         .end(function(err, res) {
 	  supertest
             .get('/game/' + id)
-            .expect(function(res) { expect(res.body.data._home_team._id).to.equal(otherGame._home_team.toString()); })
+            .expect(function(res) { expect(res.body._home_team._id).to.equal(otherGame._home_team.toString()); })
             .end(done);
 	});
     });
