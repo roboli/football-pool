@@ -4,7 +4,7 @@ var HttpStatus = require('http-status');
 exports.all = function(req, res) {
   Game.find().populate('_venue _home_team _away_team').exec(function(err, results) {
     if (err) return res.json(HttpStatus.INTERNAL_SERVER_ERROR, HttpStatus[500]);
-    res.json(HttpStatus.OK, results);
+    res.json(HttpStatus.OK, { data: results });
   });
 };
 
@@ -14,7 +14,7 @@ exports.get = function(req, res) {
     if (!result) {
       res.json(HttpStatus.NOT_FOUND, HttpStatus[404]);
     } else {
-      res.json(HttpStatus.OK, result);
+      res.json(HttpStatus.OK, { data: result });
     }
   });
 };
@@ -31,7 +31,7 @@ exports.post = function(req, res) {
       }
     }
     
-    res.json(HttpStatus.CREATED, game);    
+    res.json(HttpStatus.CREATED, { data: game });    
   });
 };
 

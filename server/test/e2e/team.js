@@ -28,7 +28,7 @@ describe('Team API', function(){
         .post('/team')
         .send(team)
         .expect('Content-Type', /json/)
-        .expect(function(res) { hasProperties(res.body, team); })
+        .expect(function(res) { hasProperties(res.body.data, team); })
         .expect(201, done);
     });
 
@@ -63,7 +63,7 @@ describe('Team API', function(){
       supertest
         .get('/team')
         .expect('Content-Type', /json/)
-        .expect(function(res) { hasProperties(res.body[0], teams[0]); })
+        .expect(function(res) { hasProperties(res.body.data[0], teams[0]); })
         .expect(200, done);
     });
 
@@ -71,7 +71,7 @@ describe('Team API', function(){
       supertest
         .get('/team/' + id)
         .expect('Content-Type', /json/)
-        .expect(function(res) { hasProperties(res.body, teams[0]); })
+        .expect(function(res) { hasProperties(res.body.data, teams[0]); })
         .expect(200, done);
     });
 
@@ -117,7 +117,7 @@ describe('Team API', function(){
         .end(function(err, res) {
 	  supertest
             .get('/team/' + id)
-            .expect(function(res) { hasProperties(res.body, otherTeam); })
+            .expect(function(res) { hasProperties(res.body.data, otherTeam); })
             .end(done);
 	});
     });

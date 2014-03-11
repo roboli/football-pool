@@ -9,9 +9,9 @@ describe('Tournament API', function(){
   describe('test get', function(){
 
     function hasProperties(res) {
-      expect(res.body.name).to.exist;
-      expect(res.body.startDate).to.exist;
-      expect(res.body.endDate).to.exist;
+      expect(res.body.data.name).to.exist;
+      expect(res.body.data.startDate).to.exist;
+      expect(res.body.data.endDate).to.exist;
     }
     
     it('should respond with 200', function(done){
