@@ -17,7 +17,6 @@ describe('Tournament Resource', function() {
       };
       
       $httpBackend.expectGET('/tournament').respond({
-	error: null,
 	data: tournament
       });
       
