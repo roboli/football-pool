@@ -18,7 +18,7 @@ describe('Admin', function() {
       };
 
       $controller('TournamentCtrl', { $scope: scope });
-      $httpBackend.expectGET('/tournament').respond(tournament);
+      $httpBackend.whenGET('/tournament').respond(tournament);
 
       expect(scope.tournament.name).toBeUndefined();
       
