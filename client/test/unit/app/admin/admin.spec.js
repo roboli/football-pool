@@ -27,4 +27,27 @@ describe('Admin', function() {
       expect(scope.tournament.name).toEqual(tournament.name);
     }));
   });
+
+  describe('VenueCtrl', function() {
+
+    it('should fetch venue models', inject(function($controller) {
+      var venues = [
+	{ "name": "Nou Camp",
+	  "location": "Barcelona",
+	  "capacity": 98000 },
+	{ "name": "Santiago Bernabeu",
+	  "location": "Madrid",
+	  "capacity": 105000 }
+      ];
+
+      $controller('VenueListCtrl', { $scope: scope });
+      $httpBackend.whenGET('/venue').respond(venues);
+
+      expect(scope.venues.length).toBe(0);
+
+      $httpBackend.flush();
+
+      expect(scope.venues.length).toBe(2);
+    }));
+  });
 });
