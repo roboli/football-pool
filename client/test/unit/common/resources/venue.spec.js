@@ -38,4 +38,10 @@ describe('Venue Resource', function() {
     obj.$update();
     $httpBackend.flush();
   });
+
+  it('should delete venue', function() {
+    $httpBackend.expectDELETE('/venue/' +  _id).respond();
+    Venue.delete({ id: _id });
+    $httpBackend.flush();
+  });
 });
