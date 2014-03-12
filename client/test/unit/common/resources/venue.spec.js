@@ -9,12 +9,10 @@ describe('Venue Resource', function() {
     $httpBackend = _$httpBackend_;
   }));
 
-  describe('test methods', function() {
-    it('should query all venues', function() {
-      $httpBackend.expectGET('/venue').respond();
-      var objs = Venue.query();
-      $httpBackend.flush();
-    });
+  it('should query all venues', function() {
+    $httpBackend.expectGET('/venue').respond();
+    var objs = Venue.query();
+    $httpBackend.flush();
   });
 
   it('should get one venue', function() {
