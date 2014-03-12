@@ -10,21 +10,9 @@ describe('Tournament Resource', function() {
 
   describe('test methods', function() {
     it('should get tournament', function() {
-      var tournament = {
-	"name": "FIFA World Cup 2014",
-	"startDate": "2014-06-01T13:00:00-03:00",
-	"endDate": "2014-07-01T19:00:00-03:00"
-      };
-      
-      $httpBackend.expectGET('/tournament').respond(tournament);
-      
+      $httpBackend.expectGET('/tournament').respond();
       var obj = Tournament.get();
-
       $httpBackend.flush();
-
-      expect(obj.name).toEqual(tournament.name);
-      expect(obj.startDate).toEqual(tournament.startDate);
-      expect(obj.endDate).toEqual(tournament.endDate);
     });
   });
 });

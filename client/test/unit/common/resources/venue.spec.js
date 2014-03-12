@@ -10,40 +10,15 @@ describe('Venue Resource', function() {
 
   describe('test methods', function() {
     it('should query all venues', function() {
-      var venues = [
-	{ "name": "Nou Camp",
-	  "location": "Barcelona",
-	  "capacity": 98000 },
-	{ "name": "Santiago Bernabeu",
-	  "location": "Madrid",
-	  "capacity": 105000 }
-      ];
-      
-      $httpBackend.expectGET('/venue').respond(venues);
-      
+      $httpBackend.expectGET('/venue').respond();
       var objs = Venue.query();
-
       $httpBackend.flush();
-
-      expect(objs.length).toEqual(2);
     });
   });
 
   it('should get one venue', function() {
-    var venue = {
-      "name": "Nou Camp",
-      "location": "Barcelona",
-      "capacity": 98000
-    };
-
-    $httpBackend.expectGET('/venue/123456789012345678901234').respond(venue);
-
+    $httpBackend.expectGET('/venue/123456789012345678901234').respond();
     var obj = Venue.get({ id: '123456789012345678901234' });
-
     $httpBackend.flush();
-
-    expect(obj.name).toEqual(venue.name);
-    expect(obj.location).toEqual(venue.location);
-    expect(obj.capacity).toEqual(venue.capacity);
   });
 });
