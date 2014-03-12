@@ -27,4 +27,14 @@ describe('Venue Resource', function() {
     Venue.save({});
     $httpBackend.flush();
   });
+
+  it('should put venue', function() {
+    $httpBackend.expectGET('/venue/123456789012345678901234').respond({ "id": "123456789012345678901234" });
+    var obj = Venue.get({ id: '123456789012345678901234' });
+    $httpBackend.flush();
+
+    $httpBackend.expectPUT('/venue/123456789012345678901234', { "id": "123456789012345678901234" }).respond();
+    obj.$update();
+    $httpBackend.flush();
+  });
 });
