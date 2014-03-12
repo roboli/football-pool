@@ -30,10 +30,8 @@ describe('Venue Resource', function() {
   });
 
   it('should put venue', function() {
-    $httpBackend.expectGET('/venue/' + _id).respond({ "id": _id });
-    var obj = Venue.get({ id: _id });
-    $httpBackend.flush();
-
+    var obj = new Venue({ id: _id });
+    
     $httpBackend.expectPUT('/venue/' + _id, { "id": _id }).respond();
     obj.$update();
     $httpBackend.flush();
