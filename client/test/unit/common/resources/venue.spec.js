@@ -21,4 +21,10 @@ describe('Venue Resource', function() {
     var obj = Venue.get({ id: '123456789012345678901234' });
     $httpBackend.flush();
   });
+
+  it('should post venue', function() {
+    $httpBackend.expectPOST('/venue', {}).respond();
+    Venue.save({});
+    $httpBackend.flush();
+  });
 });
