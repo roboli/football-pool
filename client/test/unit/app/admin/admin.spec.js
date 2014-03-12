@@ -21,14 +21,10 @@ describe('Admin', function() {
       $httpBackend.expectGET('/tournament').respond(tournament);
 
       expect(scope.tournament.name).toBeUndefined();
-      expect(scope.tournament.startDate).toBeUndefined();
-      expect(scope.tournament.endDate).toBeUndefined();
       
       $httpBackend.flush();
 
       expect(scope.tournament.name).toEqual(tournament.name);
-      expect(scope.tournament.startDate).toEqual(tournament.startDate);
-      expect(scope.tournament.endDate).toEqual(tournament.endDate);
     }));
   });
 });
