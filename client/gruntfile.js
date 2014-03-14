@@ -2,6 +2,7 @@ module.exports = function(grunt) {
 
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-clean');
+  grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-karma');
@@ -15,9 +16,15 @@ module.exports = function(grunt) {
     ' * Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author %>;\n */\n',
     src: {
       js: ['src/**/*.js'],
-      html: ['src/index.html']
+      html: ['src/index.html'],
+      tpl: ['src/**/*.tpl.html']
     },
     clean: ['<%= distdir %>/*'],
+    copy: {
+      templates: {
+        files: [{ dest: '<%= distdir %>/templates', src : '<%= src.tpl %>', flatten: true, expand: true }]
+      }
+    },
     concat: {
       dist: {
         options: {
@@ -34,7 +41,7 @@ module.exports = function(grunt) {
         }
       },
       angular: {
-        src:['bower_components/angular/angular.js', 'bower_components/angular/angular-route.js', 'bower_components/angular-resource/angular-resource.js'],
+        src:['bower_components/angular/angular.js', 'bower_components/angular-route/angular-route.js', 'bower_components/angular-resource/angular-resource.js'],
         dest: '<%= distdir %>/angular.js'
       }
     },
@@ -77,5 +84,5 @@ module.exports = function(grunt) {
   
   grunt.registerTask('test', [ 'jshint:test', 'karma:unit' ]);
   grunt.registerTask('test-watch', [ 'jshint:test', 'karma:continuous:start', 'watch' ]);
-  grunt.registerTask('build', ['clean', 'jshint:build', 'concat']);
+  grunt.registerTask('build', ['clean', 'jshint:build', 'copy', 'concat']);
 };
