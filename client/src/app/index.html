@@ -9,7 +9,7 @@
   <body>
     <div id="wrapper">
       <header ng-controller="TournamentCtrl">
-	<h1>{{tournament.name}}</h1>
+	<h1 ng-bind="tournament.name"></h1>
       </header>
       <div ng-view></div>
     </div>
