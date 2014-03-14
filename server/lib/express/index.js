@@ -6,6 +6,7 @@ var routes = require('../routes');
 var notFound = require('../middleware/notFound');
 var id = require('../middleware/id');
 
+app.use(express.logger('dev'));
 app.set('port', config.get('express:port'));
 app.use(express.bodyParser());
 app.use(express.static(__dirname + "/../../" + config.get('static_content')));
