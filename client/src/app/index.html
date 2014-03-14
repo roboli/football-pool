@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="admin">
+  <title>Local customers example</title>
+  <head>
+    <meta charset="utf-8">
+    <script src="static/angular.js"></script>
+    <script src="static/<%= grunt.config.get('pkg.name') %>.js"></script>
+  </head>
+  <body>
+    <div id="wrapper">
+      <header ng-controller="TournamentCtrl">
+	<h1>{{tournament.name}}</h1>
+      </header>
+      <div ng-view></div>
+    </div>
+  </body>
+</html>

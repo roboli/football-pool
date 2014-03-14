@@ -1,0 +1,9 @@
+{
+  "name": "football-pool-test",
+  "version": "0.0.0",
+  "private": true,
+  "dependencies": {
+    "protractor": "~0.20.1"
+  }
+}
+we

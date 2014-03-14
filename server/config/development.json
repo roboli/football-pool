@@ -4,5 +4,6 @@
   },
   "mongo": {
     "url": "mongodb://localhost/pool"
-  }
+  },
+  "static_content": "../client/dist/"
 }

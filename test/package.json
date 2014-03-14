@@ -1,0 +1,12 @@
+{
+  "name": "football-pool-test",
+  "version": "0.0.0",
+  "private": true,
+  "dependencies": {
+    "protractor": "~0.20.1"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.4",
+    "grunt-protractor-runner": "~0.2.4"
+  }
+}
