@@ -10,6 +10,12 @@
     <div id="wrapper">
       <header ng-controller="TournamentCtrl">
 	<h1 ng-bind="tournament.name"></h1>
+	<nav>
+	  <ul>
+	    <li><a href="#">Home</a></li>
+	    <li><a href="#/venues">Venues</a></li>
+	  </ul>
+	</nav>
       </header>
       <div ng-view></div>
     </div>
