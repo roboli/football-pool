@@ -3,10 +3,10 @@ var http = require('http');
 var app = express();
 var config = require('../configuration');
 var routes = require('../routes');
-var notFound = require('../middleware/notFound');
+var notFound = require('../middleware/not-found');
 var id = require('../middleware/id');
 var db = require('../db');
-var testRequests = require('../middleware/testRequests');
+var testRequests = require('../middleware/test-requests');
 
 app.set('port', config.get('express:port'));
 if (config.get('displayLog')) app.use(express.logger('dev'));
