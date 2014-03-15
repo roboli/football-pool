@@ -14,6 +14,6 @@
   "mongo": {
     "url": "mongodb://localhost/pool_test"
   },
-  "static_content": "../client/dist/",
+  "staticContent": "../client/dist/",
   "displayLog": true
 }

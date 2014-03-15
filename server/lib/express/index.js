@@ -11,8 +11,8 @@ var testRequests = require('../middleware/test-requests');
 app.set('port', config.get('express:port'));
 if (config.get('displayLog')) app.use(express.logger('dev'));
 app.use(express.bodyParser());
-app.use(express.static(__dirname + "/../../" + config.get('static_content')));
-app.use('/static', express.static(__dirname + "/../../" + config.get('static_content')));
+app.use(express.static(__dirname + "/../../" + config.get('staticContent')));
+app.use('/static', express.static(__dirname + "/../../" + config.get('staticContent')));
 app.use(testRequests);
 app.param('id', id.validate);
 
