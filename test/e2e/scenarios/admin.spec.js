@@ -8,7 +8,7 @@ describe('Admin', function() {
   });
 
   it('should show tournament header', function() {
-    expect(element(by.binding('tournament.name')).getText()).toBe('FIFA World Cup 2014');
+    expect(element(by.binding('tournament.name')).getText()).toBe('Test Tournament');
     expect(element(by.tagName('p')).getText()).toBe('Welcome to the administration app!');
   });
 
