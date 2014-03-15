@@ -5,6 +5,7 @@ var config = require('../configuration');
 var routes = require('../routes');
 var notFound = require('../middleware/notFound');
 var id = require('../middleware/id');
+var db = require('../db');
 
 app.use(express.logger('dev'));
 app.set('port', config.get('express:port'));
