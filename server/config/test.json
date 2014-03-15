@@ -1,8 +1,18 @@
 {
+  "application": {
+    "name": "football-pool-test",
+    "tournament": {
+      "name": "Test Tournament",
+      "location": "Test Location",
+      "startDate": "2014-06-12T13:00:00-03:00",
+      "endDate": "2014-07-13T13:00:00-03:00"
+    }
+  },
   "express": {
     "port": 8080
   },
   "mongo": {
     "url": "mongodb://localhost/pool_test"
-  }
+  },
+  "static_content": "../client/dist/"
 }

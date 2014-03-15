@@ -1,9 +1,8 @@
 {
   "express": {
-    "port": 8080
+    "port": 8090
   },
   "mongo": {
     "url": "mongodb://localhost/pool_test"
-  },
-  "static_content": "../client/dist/"
+  }
 }
