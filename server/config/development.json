@@ -3,7 +3,7 @@
     "port": 8080
   },
   "mongo": {
-    "url": "mongodb://localhost/pool"
+    "url": "mongodb://localhost/pool_test"
   },
   "static_content": "../client/dist/"
 }
