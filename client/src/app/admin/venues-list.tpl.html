@@ -1,4 +1,6 @@
-<p>Here goes the venues...</p>
+<div ng-if="venues.length <= 0">
+  <p>No venues found</p>
+</div>
 <ul>
   <li ng-repeat="venue in venues">
     <div>
