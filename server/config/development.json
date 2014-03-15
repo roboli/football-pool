@@ -4,5 +4,6 @@
   },
   "mongo": {
     "url": "mongodb://localhost/pool_test"
-  }
+  },
+  "displayLog": false
 }

@@ -9,7 +9,7 @@ var db = require('../db');
 var testRequests = require('../middleware/testRequests');
 
 app.set('port', config.get('express:port'));
-app.use(express.logger('dev'));
+if (config.get('displayLog')) app.use(express.logger('dev'));
 app.use(express.bodyParser());
 app.use(express.static(__dirname + "/../../" + config.get('static_content')));
 app.use('/static', express.static(__dirname + "/../../" + config.get('static_content')));

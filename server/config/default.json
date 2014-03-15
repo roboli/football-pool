@@ -10,5 +10,6 @@
   },
   "express": {
     "port": 8000
-  }
+  },
+  "displayLog": false
 }

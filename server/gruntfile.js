@@ -7,7 +7,7 @@ module.exports = function(grunt) {
 
   grunt.initConfig({
     env: {
-      test: { NODE_ENV: 'TEST' },
+      test: { NODE_ENV: 'development' },
     },
     jshint: {
       test: {
