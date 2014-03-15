@@ -1,6 +1,5 @@
 var config = require('./config');
 var expect = require('chai').expect;
-var db = require(config.lib_path + 'db');
 var Venue = require(config.models_path + 'venue');
 var mongoose = require('mongoose');
 
