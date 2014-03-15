@@ -7,8 +7,8 @@ var notFound = require('../middleware/notFound');
 var id = require('../middleware/id');
 var db = require('../db');
 
-app.use(express.logger('dev'));
 app.set('port', config.get('express:port'));
+app.use(express.logger('dev'));
 app.use(express.bodyParser());
 app.use(express.static(__dirname + "/../../" + config.get('static_content')));
 app.use('/static', express.static(__dirname + "/../../" + config.get('static_content')));
