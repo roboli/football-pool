@@ -1,0 +1,25 @@
+<form novalidate>
+  <div>
+    <label>Name:</label>
+    <div>
+      <input type="text" ng-model="venue.name" required />
+    </div>
+  </div>
+  <div>
+    <label>Location:</label>
+    <div>
+      <input type="email" ng-model="venue.location" required />
+    </div>
+  </div>
+  <div>
+    <label>Capacity:</label>
+    <div>
+      <input type="number" ng-model="venue.capacity" />
+    </div>
+  </div>
+  <div>
+    <div>
+      <button ng-click="save(venue)" ng-disabled="form.$invalid">Save</button>
+    </div>
+  </div>
+</form>
