@@ -28,7 +28,7 @@ describe('Admin', function() {
     }));
   });
 
-  describe('VenueCtrl', function() {
+  describe('VenueListCtrl', function() {
 
     it('should fetch venue models', inject(function($controller) {
       var venues = [
