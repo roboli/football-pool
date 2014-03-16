@@ -16,4 +16,10 @@ describe('Admin', function() {
     expect(element(by.tagName('p')).getText()).toBe('No venues found');
     expect(element.all(by.repeater('venue in venues')).count()).toBe(0);
   });
+
+  it('should insert a venue', function() {
+    element(by.css("a[href='#/venues']")).click();
+    element(by.tagName('button')).click();
+    expect(element(by.tagName('form')).isPresent()).toBe(true);
+  });
 });
