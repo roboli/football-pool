@@ -77,7 +77,7 @@ module.exports = function(grunt) {
       },
       test: {
 	files: ['src/**/*.js', 'test/**/*.js'],
-	tasks: ['jshint', 'karma:unit:run']
+	tasks: ['jshint', 'karma:continuous:run']
       }
     }
   });
