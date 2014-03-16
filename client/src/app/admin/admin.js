@@ -22,8 +22,12 @@ angular.module('admin', ['ngRoute', 'resources.tournament', 'resources.venue'])
   $scope.tournament = Tournament.get();
 }])
 
-.controller('VenueListCtrl', ['$scope', 'Venue', function($scope, Venue) {
+.controller('VenueListCtrl', ['$scope', '$location', 'Venue', function($scope, $location, Venue) {
   $scope.venues = Venue.query();
+  
+  $scope.new = function() {
+    $location.path('/venues/new');
+  };
 }])
 
 .controller('VenueEditCtrl', ['$scope', 'Venue', function($scope, Venue) {

@@ -49,6 +49,16 @@ describe('Admin', function() {
 
       expect(scope.venues.length).toBe(2);
     }));
+
+    it('should change location on new click', inject(function($controller) {
+      var location = jasmine.createSpyObj('location', ['path']);
+
+      $controller('VenueListCtrl', { $scope: scope, $location: location });
+
+      scope.new();
+
+      expect(location.path).toHaveBeenCalled();
+    }));
   });
 
   describe('VenueEditCtrl', function() {
