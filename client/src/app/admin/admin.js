@@ -9,6 +9,10 @@ angular.module('admin', ['ngRoute', 'resources.tournament', 'resources.venue'])
       templateUrl: '/templates/venues-list.tpl.html',
       controller: 'VenueListCtrl'
     })
+    .when('/venues/new', {
+      templateUrl: '/templates/venues-edit.tpl.html',
+      controller: 'VenueEditCtrl'
+    })
     .otherwise({
       redirectTo: '/home'
     });
@@ -20,4 +24,10 @@ angular.module('admin', ['ngRoute', 'resources.tournament', 'resources.venue'])
 
 .controller('VenueListCtrl', ['$scope', 'Venue', function($scope, Venue) {
   $scope.venues = Venue.query();
+}])
+
+.controller('VenueEditCtrl', ['$scope', 'Venue', function($scope, Venue) {
+  $scope.save = function(venue) {
+    Venue.save(venue);
+  };
 }]);

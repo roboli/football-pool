@@ -50,4 +50,16 @@ describe('Admin', function() {
       expect(scope.venues.length).toBe(2);
     }));
   });
+
+  describe('VenueEditCtrl', function() {
+
+    it('should create new venue', inject(function($controller) {
+      $controller('VenueEditCtrl', { $scope: scope });
+      $httpBackend.expectPOST('/venue').respond();
+
+      scope.save({});
+
+      $httpBackend.flush();
+    }));
+  });
 });
