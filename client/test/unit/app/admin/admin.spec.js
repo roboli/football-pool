@@ -64,12 +64,16 @@ describe('Admin', function() {
   describe('VenueEditCtrl', function() {
 
     it('should create new venue', inject(function($controller) {
-      $controller('VenueEditCtrl', { $scope: scope });
-      $httpBackend.expectPOST('/venue').respond();
-
+      var id = '123456789012345678901234';
+      var location = jasmine.createSpyObj('location', ['path']);
+      $controller('VenueEditCtrl', { $scope: scope, $location: location });
+      $httpBackend.expectPOST('/venue', {}).respond({ "id": id });
+      
       scope.save({});
-
+      
       $httpBackend.flush();
+      
+      expect(location.path).toHaveBeenCalledWith('/venue/' + id);
     }));
   });
 });

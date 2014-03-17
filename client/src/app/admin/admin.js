@@ -30,8 +30,10 @@ angular.module('admin', ['ngRoute', 'resources.tournament', 'resources.venue'])
   };
 }])
 
-.controller('VenueEditCtrl', ['$scope', 'Venue', function($scope, Venue) {
+.controller('VenueEditCtrl', ['$scope', '$location', 'Venue', function($scope, $location, Venue) {
   $scope.save = function(venue) {
-    Venue.save(venue);
+    Venue.save(venue, function(data) {
+      $location.path('/venue/' + data.id);
+    });
   };
 }]);
