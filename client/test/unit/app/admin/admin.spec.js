@@ -66,6 +66,7 @@ describe('Admin', function() {
     it('should create new venue', inject(function($controller) {
       var id = '123456789012345678901234';
       var location = jasmine.createSpyObj('location', ['path']);
+      
       $controller('VenueEditCtrl', { $scope: scope, $location: location });
       $httpBackend.expectPOST('/venue', {}).respond({ "id": id });
       
