@@ -21,5 +21,14 @@ describe('Admin', function() {
     element(by.css("a[href='#/venues']")).click();
     element(by.tagName('button')).click();
     expect(element(by.tagName('form')).isPresent()).toBe(true);
+
+    element(by.model('venue.name')).sendKeys('Maracana');
+    element(by.model('venue.location')).sendKeys('Rio de Janeiro');
+    element(by.model('venue.capacity')).sendKeys('98000');
+    element(by.tagName('button')).click();
+    
+    expect(element(by.binding('venue.name.')).getText()).toBe('Maracana');
+    expect(element(by.binding('venue.location')).getText()).toBe('Maracana');
+    expect(element(by.binding('venue.name.')).getText()).toBe('Maracana');
   });
 });
