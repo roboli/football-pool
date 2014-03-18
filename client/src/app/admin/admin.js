@@ -39,7 +39,7 @@ angular.module('admin', ['ngRoute', 'resources.tournament', 'resources.venue'])
   
   $scope.save = function(venue) {
     Venue.save(venue, function(data) {
-      $location.path('/venue/' + data.id);
+      $location.path('/venues/' + data._id);
     });
   };
 }])
