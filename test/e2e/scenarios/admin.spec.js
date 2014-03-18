@@ -27,8 +27,8 @@ describe('Admin', function() {
     element(by.model('venue.capacity')).sendKeys('98000');
     element(by.tagName('button')).click();
     
-    expect(element(by.binding('venue.name.')).getText()).toBe('Maracana');
-    expect(element(by.binding('venue.location')).getText()).toBe('Maracana');
-    expect(element(by.binding('venue.name.')).getText()).toBe('Maracana');
+    expect(element(by.binding('venue.name')).getText()).toBe('Maracana');
+    expect(element(by.binding('venue.location')).getText()).toBe('Rio de Janeiro');
+    expect(element(by.binding('venue.capacity')).getText()).toBe('98000');
   });
 });
