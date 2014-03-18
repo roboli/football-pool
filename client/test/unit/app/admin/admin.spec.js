@@ -92,4 +92,19 @@ describe('Admin', function() {
       expect(scope.venue.id).toBe(id);
     }));
   });
+
+  describe('VenueEditCtrl', function() {
+
+    it('should display venue information', inject(function($controller, $routeParams) {
+      var id = '123456789012345678901234';
+
+      $routeParams.id = id;
+      $controller('VenueEditCtrl', { $scope: scope });
+      $httpBackend.expectGET('/venue/' + id).respond({ "id": id });
+
+      $httpBackend.flush();
+
+      expect(scope.venue.id).toBe(id);
+    }));
+  });
 });
