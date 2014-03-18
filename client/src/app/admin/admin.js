@@ -6,11 +6,11 @@ angular.module('admin', ['ngRoute', 'resources.tournament', 'resources.venue'])
       templateUrl: '/templates/admin.tpl.html',
     })
     .when('/venues', {
-      templateUrl: '/templates/venues-list.tpl.html',
+      templateUrl: '/templates/venue-list.tpl.html',
       controller: 'VenueListCtrl'
     })
     .when('/venues/new', {
-      templateUrl: '/templates/venues-edit.tpl.html',
+      templateUrl: '/templates/venue-edit.tpl.html',
       controller: 'VenueEditCtrl'
     })
     .when('/venues/:id', {
