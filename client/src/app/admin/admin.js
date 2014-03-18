@@ -35,6 +35,8 @@ angular.module('admin', ['ngRoute', 'resources.tournament', 'resources.venue'])
 }])
 
 .controller('VenueEditCtrl', ['$scope', '$location', 'Venue', function($scope, $location, Venue) {
+  $scope.venue = {};
+  
   $scope.save = function(venue) {
     Venue.save(venue, function(data) {
       $location.path('/venue/' + data.id);
