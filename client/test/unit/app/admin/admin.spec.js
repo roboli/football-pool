@@ -77,4 +77,19 @@ describe('Admin', function() {
       expect(location.path).toHaveBeenCalledWith('/venue/' + id);
     }));
   });
+
+  describe('VenueViewCtrl', function() {
+
+    it('should display venue information', inject(function($controller, $routeParams) {
+      var id = '123456789012345678901234';
+
+      $routeParams.id = id;
+      $controller('VenueViewCtrl', { $scope: scope });
+      $httpBackend.expectGET('/venue/' + id).respond({ "id": id });
+
+      $httpBackend.flush();
+
+      expect(scope.venue.id).toBe(id);
+    }));
+  });
 });

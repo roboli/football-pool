@@ -13,6 +13,10 @@ angular.module('admin', ['ngRoute', 'resources.tournament', 'resources.venue'])
       templateUrl: '/templates/venues-edit.tpl.html',
       controller: 'VenueEditCtrl'
     })
+    .when('/venues/:id', {
+      templateUrl: '/templates/venue-view.tpl.html',
+      controller: 'VenueViewCtrl'
+    })
     .otherwise({
       redirectTo: '/home'
     });
@@ -36,4 +40,8 @@ angular.module('admin', ['ngRoute', 'resources.tournament', 'resources.venue'])
       $location.path('/venue/' + data.id);
     });
   };
+}])
+
+.controller('VenueViewCtrl', ['$scope', '$routeParams', 'Venue', function($scope, $routeParams, Venue) {
+  $scope.venue = Venue.get({ id: $routeParams.id });
 }]);
