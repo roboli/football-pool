@@ -68,13 +68,13 @@ describe('Admin', function() {
       var location = jasmine.createSpyObj('location', ['path']);
       
       $controller('VenueEditCtrl', { $scope: scope, $location: location });
-      $httpBackend.expectPOST('/venue', {}).respond({ "id": id });
+      $httpBackend.expectPOST('/venue', {}).respond({ "_id": id });
       
       scope.save({});
       
       $httpBackend.flush();
       
-      expect(location.path).toHaveBeenCalledWith('/venue/' + id);
+      expect(location.path).toHaveBeenCalledWith('/venues/' + id);
     }));
   });
 
