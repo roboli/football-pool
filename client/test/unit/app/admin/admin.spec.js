@@ -94,10 +94,9 @@ describe('Admin', function() {
   });
 
   describe('VenueEditCtrl', function() {
+    var id = '123456789012345678901234';
 
     it('should display venue information', inject(function($controller, $routeParams) {
-      var id = '123456789012345678901234';
-
       $routeParams.id = id;
       $controller('VenueEditCtrl', { $scope: scope });
       $httpBackend.expectGET('/venue/' + id).respond({ "id": id });
@@ -105,6 +104,21 @@ describe('Admin', function() {
       $httpBackend.flush();
 
       expect(scope.venue.id).toBe(id);
+    }));
+
+    it('should edit venue', inject(function($controller, $routeParams) {
+      $routeParams.id = id;
+      $controller('VenueEditCtrl', { $scope: scope });
+      $httpBackend.whenGET('/venue/' + id).respond({ "id": id });
+
+      $httpBackend.flush();
+
+      $httpBackend.expectPUT('/venue/' + id, { "id": id, "name": 'Test' }).respond();
+      
+      scope.venue.name = 'Test';
+      scope.save(scope.venue);
+
+      $httpBackend.flush();
     }));
   });
 });
