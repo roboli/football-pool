@@ -11,7 +11,7 @@ angular.module('admin', ['ngRoute', 'resources.tournament', 'resources.venue'])
     })
     .when('/venues/new', {
       templateUrl: '/templates/venue-edit.tpl.html',
-      controller: 'VenueEditCtrl'
+      controller: 'VenueAddCtrl'
     })
     .when('/venues/:id', {
       templateUrl: '/templates/venue-view.tpl.html',
@@ -34,7 +34,7 @@ angular.module('admin', ['ngRoute', 'resources.tournament', 'resources.venue'])
   };
 }])
 
-.controller('VenueEditCtrl', ['$scope', '$location', 'Venue', function($scope, $location, Venue) {
+.controller('VenueAddCtrl', ['$scope', '$location', 'Venue', function($scope, $location, Venue) {
   $scope.venue = {};
   
   $scope.save = function(venue) {
