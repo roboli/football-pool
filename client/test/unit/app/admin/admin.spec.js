@@ -107,18 +107,22 @@ describe('Admin', function() {
     }));
 
     it('should edit venue', inject(function($controller, $routeParams) {
+      var location = jasmine.createSpyObj('location', ['path']);
+      
       $routeParams.id = id;
-      $controller('VenueEditCtrl', { $scope: scope });
-      $httpBackend.whenGET('/venue/' + id).respond({ "id": id });
+      $controller('VenueEditCtrl', { $scope: scope, $location: location });
+      $httpBackend.whenGET('/venue/' + id).respond({ "_id": id });
 
       $httpBackend.flush();
 
-      $httpBackend.expectPUT('/venue/' + id, { "id": id, "name": 'Test' }).respond();
+      $httpBackend.expectPUT('/venue', { "_id": id, "name": 'Test' }).respond();
       
       scope.venue.name = 'Test';
       scope.save(scope.venue);
 
       $httpBackend.flush();
+
+      expect(location.path).toHaveBeenCalledWith('/venues/' + id);
     }));
   });
 });

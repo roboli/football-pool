@@ -48,11 +48,13 @@ angular.module('admin', ['ngRoute', 'resources.tournament', 'resources.venue'])
   $scope.venue = Venue.get({ id: $routeParams.id });
 }])
 
-.controller('VenueEditCtrl', ['$scope', '$routeParams', 'Venue', function($scope, $routeParams, Venue) {
+.controller('VenueEditCtrl', ['$scope', '$location', '$routeParams', 'Venue', function($scope, $location, $routeParams, Venue) {
   $scope.venue = Venue.get({ id: $routeParams.id });
 
   $scope.save = function(venue) {
-    venue.$update();
+    venue.$update(function() {
+      $location.path('/venues/' + venue._id);
+    });
   };
 }]);
 
