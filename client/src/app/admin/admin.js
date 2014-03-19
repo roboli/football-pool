@@ -42,6 +42,10 @@ angular.module('admin', ['ngRoute', 'resources.tournament', 'resources.venue'])
       $location.path('/venues/' + data._id);
     });
   };
+
+  $scope.cancel = function() {
+    $location.path('/venues');
+  };
 }])
 
 .controller('VenueViewCtrl', ['$scope', '$routeParams', 'Venue', function($scope, $routeParams, Venue) {

@@ -62,12 +62,16 @@ describe('Admin', function() {
   });
 
   describe('VenueAddCtrl', function() {
+    var location;
 
-    it('should create new venue', inject(function($controller) {
-      var id = '123456789012345678901234';
-      var location = jasmine.createSpyObj('location', ['path']);
-      
+    beforeEach(inject(function($controller) {
+      location = jasmine.createSpyObj('location', ['path']);
       $controller('VenueAddCtrl', { $scope: scope, $location: location });
+    }));
+
+    it('should create new venue', function() {
+      var id = '123456789012345678901234';
+      
       $httpBackend.expectPOST('/venue', {}).respond({ "_id": id });
       
       scope.save({});
@@ -75,7 +79,12 @@ describe('Admin', function() {
       $httpBackend.flush();
       
       expect(location.path).toHaveBeenCalledWith('/venues/' + id);
-    }));
+    });
+
+    it('should cancel an insertion', function() {
+      scope.cancel();
+      expect(location.path).toHaveBeenCalledWith('/venues');
+    });
   });
 
   describe('VenueViewCtrl', function() {
