@@ -51,8 +51,8 @@ angular.module('admin', ['ngRoute', 'resources.tournament', 'resources.venue'])
 .controller('VenueViewCtrl', ['$scope', '$routeParams', '$location', 'Venue', function($scope, $routeParams, $location, Venue) {
   $scope.venue = Venue.get({ id: $routeParams.id });
 
-  $scope.edit = function(id) {
-    $location.path('/venues/' + id + '/edit');
+  $scope.edit = function(venue) {
+    $location.path('/venues/' + venue._id + '/edit');
   };
 }])
 

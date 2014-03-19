@@ -93,7 +93,7 @@ describe('Admin', function() {
       $controller('VenueViewCtrl', { $scope: scope, $location: location });
       $httpBackend.expectGET('/venue/' + id).respond({ "_id": id });
       $httpBackend.flush();
-      scope.edit(scope.venue._id);
+      scope.edit(scope.venue);
       expect(location.path).toHaveBeenCalledWith('/venues/' + id + '/edit');
     }));
   });
