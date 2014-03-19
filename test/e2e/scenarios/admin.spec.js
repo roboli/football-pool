@@ -34,4 +34,23 @@ describe('Admin', function() {
       expect(element(by.binding('venue.capacity')).getText()).toBe('98000');
     });
   });
+
+  describe('With venues', function() {
+    
+    beforeEach(function() {
+      browser.ignoreSynchronization = true;
+      browser.get('/_test/clean_db');
+      browser.get('/_test/load_venues_fixture');
+      browser.get('/index.html');
+    });
+
+    it('should show venue details', function() {
+      element(by.css("a[href='#/venues']")).click();
+      element.all(by.css("a")).last().click();
+      
+      expect(element(by.binding('venue.name')).isPresent()).toBe(true);
+      expect(element(by.binding('venue.location')).isPresent()).toBe(true);
+      expect(element(by.binding('venue.capacity')).isPresent()).toBe(true);
+    });
+  });
 });
