@@ -75,14 +75,26 @@ describe('Admin', function() {
   });
 
   describe('VenueViewCtrl', function() {
+    var id = '123456789012345678901234';
 
-    it('should display venue information', inject(function($controller, $routeParams) {
-      var id = '123456789012345678901234';
+    beforeEach(inject(function($routeParams) {
       $routeParams.id = id;
+    }));
+
+    it('should display venue information', inject(function($controller) {
       $controller('VenueViewCtrl', { $scope: scope });
       $httpBackend.expectGET('/venue/' + id).respond({ "id": id });
       $httpBackend.flush();
       expect(scope.venue.id).toBe(id);
+    }));
+
+    it('should navigate to the edit form', inject(function($controller) {
+      var location = jasmine.createSpyObj('location', ['path']);
+      $controller('VenueViewCtrl', { $scope: scope, $location: location });
+      $httpBackend.expectGET('/venue/' + id).respond({ "_id": id });
+      $httpBackend.flush();
+      scope.edit(scope.venue._id);
+      expect(location.path).toHaveBeenCalledWith('/venues/' + id + '/edit');
     }));
   });
 
