@@ -57,7 +57,7 @@ describe('Admin', function() {
 
       scope.new();
 
-      expect(location.path).toHaveBeenCalled();
+      expect(location.path).toHaveBeenCalledWith('/venues/new');
     }));
   });
 
