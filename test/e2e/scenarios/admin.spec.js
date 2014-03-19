@@ -33,6 +33,13 @@ describe('Admin', function() {
       expect(element(by.binding('venue.location')).getText()).toBe('Rio de Janeiro');
       expect(element(by.binding('venue.capacity')).getText()).toBe('98000');
     });
+
+    it('should cancel an insertion', function() {
+      element(by.css("a[href='#/venues']")).click();
+      element(by.tagName('button')).click();
+      element(by.buttonText('Cancel')).click();
+      expect(element.all(by.repeater('venue in venues')).count()).toBe(0);
+    });
   });
 
   describe('With venues', function() {
