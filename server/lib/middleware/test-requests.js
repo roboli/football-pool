@@ -24,7 +24,7 @@ testRequests.registerHandlers({
     ], done);
   },
 
-  load_admin_fixture: function(req, res, done) {
+  load_venues_fixture: function(req, res, done) {
     var venues = [
       { name: "Maracana",
 	location: "Rio de Janeiro",
