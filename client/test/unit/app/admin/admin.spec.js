@@ -19,11 +19,8 @@ describe('Admin', function() {
 
       $controller('TournamentCtrl', { $scope: scope });
       $httpBackend.whenGET('/tournament').respond(tournament);
-
       expect(scope.tournament.name).toBeUndefined();
-      
       $httpBackend.flush();
-
       expect(scope.tournament.name).toEqual(tournament.name);
     }));
   });
@@ -42,21 +39,15 @@ describe('Admin', function() {
 
       $controller('VenueListCtrl', { $scope: scope });
       $httpBackend.whenGET('/venue').respond(venues);
-
       expect(scope.venues.length).toBe(0);
-
       $httpBackend.flush();
-
       expect(scope.venues.length).toBe(2);
     }));
 
     it('should change location on new click', inject(function($controller) {
       var location = jasmine.createSpyObj('location', ['path']);
-
       $controller('VenueListCtrl', { $scope: scope, $location: location });
-
       scope.new();
-
       expect(location.path).toHaveBeenCalledWith('/venues/new');
     }));
   });
@@ -71,13 +62,9 @@ describe('Admin', function() {
 
     it('should create new venue', function() {
       var id = '123456789012345678901234';
-      
       $httpBackend.expectPOST('/venue', {}).respond({ "_id": id });
-      
       scope.save({});
-      
       $httpBackend.flush();
-      
       expect(location.path).toHaveBeenCalledWith('/venues/' + id);
     });
 
@@ -91,13 +78,10 @@ describe('Admin', function() {
 
     it('should display venue information', inject(function($controller, $routeParams) {
       var id = '123456789012345678901234';
-
       $routeParams.id = id;
       $controller('VenueViewCtrl', { $scope: scope });
       $httpBackend.expectGET('/venue/' + id).respond({ "id": id });
-
       $httpBackend.flush();
-
       expect(scope.venue.id).toBe(id);
     }));
   });
@@ -109,28 +93,20 @@ describe('Admin', function() {
       $routeParams.id = id;
       $controller('VenueEditCtrl', { $scope: scope });
       $httpBackend.expectGET('/venue/' + id).respond({ "id": id });
-
       $httpBackend.flush();
-
       expect(scope.venue.id).toBe(id);
     }));
 
     it('should edit venue', inject(function($controller, $routeParams) {
       var location = jasmine.createSpyObj('location', ['path']);
-      
       $routeParams.id = id;
       $controller('VenueEditCtrl', { $scope: scope, $location: location });
       $httpBackend.whenGET('/venue/' + id).respond({ "_id": id });
-
       $httpBackend.flush();
-
       $httpBackend.expectPUT('/venue', { "_id": id, "name": 'Test' }).respond();
-      
       scope.venue.name = 'Test';
       scope.save(scope.venue);
-
       $httpBackend.flush();
-
       expect(location.path).toHaveBeenCalledWith('/venues/' + id);
     }));
   });
