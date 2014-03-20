@@ -60,6 +60,13 @@ describe('Admin', function() {
       expect(element(by.binding('venue.capacity')).isPresent()).toBe(true);
     });
 
+    it('should show venues list after closing venue\'s view', function() {
+      element(by.css("a[href='#/venues']")).click();
+      element.all(by.css("a")).last().click();
+      element(by.buttonText('Close')).click();
+      expect(element.all(by.repeater('venue in venues')).count()).toBeGreaterThan(0);
+    });
+
     it('should update venue', function() {
       element(by.css("a[href='#/venues']")).click();
       element.all(by.css("a")).last().click();
