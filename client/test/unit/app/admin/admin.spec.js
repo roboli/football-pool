@@ -53,10 +53,9 @@ describe('Admin', function() {
   });
 
   describe('VenueAddCtrl', function() {
-    var location;
+    var location = jasmine.createSpyObj('location', ['path']);
 
     beforeEach(inject(function($controller) {
-      location = jasmine.createSpyObj('location', ['path']);
       $controller('VenueAddCtrl', { $scope: scope, $location: location });
     }));
 
