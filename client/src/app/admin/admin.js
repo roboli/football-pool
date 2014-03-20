@@ -17,6 +17,10 @@ angular.module('admin', ['ngRoute', 'resources.tournament', 'resources.venue'])
       templateUrl: '/templates/venue-view.tpl.html',
       controller: 'VenueViewCtrl'
     })
+    .when('/venues/:id/edit', {
+      templateUrl: '/templates/venue-edit.tpl.html',
+      controller: 'VenueEditCtrl'
+    })
     .otherwise({
       redirectTo: '/home'
     });
