@@ -68,5 +68,9 @@ angular.module('admin', ['ngRoute', 'resources.tournament', 'resources.venue'])
       $location.path('/venues/' + venue._id);
     });
   };
+
+  $scope.cancel = function(venue) {
+    $location.path('/venues/' + venue._id);
+  };
 }]);
 

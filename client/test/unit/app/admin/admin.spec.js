@@ -121,5 +121,15 @@ describe('Admin', function() {
       $httpBackend.flush();
       expect(location.path).toHaveBeenCalledWith('/venues/' + id);
     }));
+
+    it('should cancel an edition', inject(function($controller, $routeParams) {
+      var location = jasmine.createSpyObj('location', ['path']);
+      $routeParams.id = id;
+      $controller('VenueEditCtrl', { $scope: scope, $location: location });
+      $httpBackend.whenGET('/venue/' + id).respond({ "_id": id });
+      $httpBackend.flush();
+      scope.cancel(scope.venue);
+      expect(location.path).toHaveBeenCalledWith('/venues/' + id);
+    }));
   });
 });
