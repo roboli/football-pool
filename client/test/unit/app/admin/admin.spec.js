@@ -75,7 +75,8 @@ describe('Admin', function() {
 
   describe('VenueViewCtrl', function() {
     var id = '123456789012345678901234';
-
+    var location = jasmine.createSpyObj('location', ['path']);
+    
     beforeEach(inject(function($routeParams) {
       $routeParams.id = id;
     }));
@@ -88,7 +89,6 @@ describe('Admin', function() {
     }));
 
     it('should navigate back to the venues list', inject(function($controller) {
-      var location = jasmine.createSpyObj('location', ['path']);
       $controller('VenueViewCtrl', { $scope: scope, $location: location });
       $httpBackend.whenGET('/venue/' + id).respond({ "_id": id });
       $httpBackend.flush();
@@ -97,7 +97,6 @@ describe('Admin', function() {
     }));
 
     it('should navigate to the edit form', inject(function($controller) {
-      var location = jasmine.createSpyObj('location', ['path']);
       $controller('VenueViewCtrl', { $scope: scope, $location: location });
       $httpBackend.expectGET('/venue/' + id).respond({ "_id": id });
       $httpBackend.flush();
