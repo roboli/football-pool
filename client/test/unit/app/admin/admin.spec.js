@@ -100,18 +100,20 @@ describe('Admin', function() {
 
   describe('VenueEditCtrl', function() {
     var id = '123456789012345678901234';
+    var location = jasmine.createSpyObj('location', ['path']);
 
-    it('should display venue information', inject(function($controller, $routeParams) {
+    beforeEach(inject(function($routeParams) {
       $routeParams.id = id;
+    }));
+
+    it('should display venue information', inject(function($controller) {
       $controller('VenueEditCtrl', { $scope: scope });
       $httpBackend.expectGET('/venue/' + id).respond({ "_id": id });
       $httpBackend.flush();
       expect(scope.venue._id).toBe(id);
     }));
 
-    it('should edit venue', inject(function($controller, $routeParams) {
-      var location = jasmine.createSpyObj('location', ['path']);
-      $routeParams.id = id;
+    it('should edit venue', inject(function($controller) {
       $controller('VenueEditCtrl', { $scope: scope, $location: location });
       $httpBackend.whenGET('/venue/' + id).respond({ "_id": id });
       $httpBackend.flush();
@@ -122,9 +124,7 @@ describe('Admin', function() {
       expect(location.path).toHaveBeenCalledWith('/venues/' + id);
     }));
 
-    it('should cancel an edition', inject(function($controller, $routeParams) {
-      var location = jasmine.createSpyObj('location', ['path']);
-      $routeParams.id = id;
+    it('should cancel an edition', inject(function($controller) {
       $controller('VenueEditCtrl', { $scope: scope, $location: location });
       $httpBackend.whenGET('/venue/' + id).respond({ "_id": id });
       $httpBackend.flush();
