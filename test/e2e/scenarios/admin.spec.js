@@ -59,5 +59,24 @@ describe('Admin', function() {
       expect(element(by.binding('venue.location')).isPresent()).toBe(true);
       expect(element(by.binding('venue.capacity')).isPresent()).toBe(true);
     });
+
+    it('should update venue', function() {
+      element(by.css("a[href='#/venues']")).click();
+      element.all(by.css("a")).last().click();
+      element(by.buttonText('Edit')).click();
+      expect(element(by.tagName('form')).isPresent()).toBe(true);
+
+      element(by.model('venue.name')).clear();
+      element(by.model('venue.name')).sendKeys('Maracana');
+      element(by.model('venue.location')).clear();
+      element(by.model('venue.location')).sendKeys('Rio de Janeiro');
+      element(by.model('venue.capacity')).clear();
+      element(by.model('venue.capacity')).sendKeys('98000');
+      element(by.buttonText('Save')).click();
+
+      expect(element(by.binding('venue.name')).getText()).toBe('Maracana');
+      expect(element(by.binding('venue.location')).getText()).toBe('Rio de Janeiro');
+      expect(element(by.binding('venue.capacity')).getText()).toBe('98000');
+    });
   });
 });
