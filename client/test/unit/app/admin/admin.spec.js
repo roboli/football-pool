@@ -83,9 +83,9 @@ describe('Admin', function() {
 
     it('should display venue information', inject(function($controller) {
       $controller('VenueViewCtrl', { $scope: scope });
-      $httpBackend.expectGET('/venue/' + id).respond({ "id": id });
+      $httpBackend.expectGET('/venue/' + id).respond({ "_id": id });
       $httpBackend.flush();
-      expect(scope.venue.id).toBe(id);
+      expect(scope.venue._id).toBe(id);
     }));
 
     it('should navigate to the edit form', inject(function($controller) {
@@ -104,9 +104,9 @@ describe('Admin', function() {
     it('should display venue information', inject(function($controller, $routeParams) {
       $routeParams.id = id;
       $controller('VenueEditCtrl', { $scope: scope });
-      $httpBackend.expectGET('/venue/' + id).respond({ "id": id });
+      $httpBackend.expectGET('/venue/' + id).respond({ "_id": id });
       $httpBackend.flush();
-      expect(scope.venue.id).toBe(id);
+      expect(scope.venue._id).toBe(id);
     }));
 
     it('should edit venue', inject(function($controller, $routeParams) {
@@ -115,7 +115,7 @@ describe('Admin', function() {
       $controller('VenueEditCtrl', { $scope: scope, $location: location });
       $httpBackend.whenGET('/venue/' + id).respond({ "_id": id });
       $httpBackend.flush();
-      $httpBackend.expectPUT('/venue', { "_id": id, "name": 'Test' }).respond();
+      $httpBackend.expectPUT('/venue/' + id, { "_id": id, "name": 'Test' }).respond();
       scope.venue.name = 'Test';
       scope.save(scope.venue);
       $httpBackend.flush();

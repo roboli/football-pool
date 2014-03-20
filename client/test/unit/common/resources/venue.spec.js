@@ -1,6 +1,6 @@
 describe('Venue Resource', function() {
   var Venue, $httpBackend;
-  var _id = '123456789012345678901234';
+  var id = '123456789012345678901234';
 
   beforeEach(module('resources.venue'));
 
@@ -16,8 +16,8 @@ describe('Venue Resource', function() {
   });
 
   it('should get one venue', function() {
-    $httpBackend.expectGET('/venue/' + _id).respond();
-    var obj = Venue.get({ id: _id });
+    $httpBackend.expectGET('/venue/' + id).respond();
+    var obj = Venue.get({ "id": id });
     $httpBackend.flush();
   });
 
@@ -28,16 +28,16 @@ describe('Venue Resource', function() {
   });
 
   it('should put venue', function() {
-    var obj = new Venue({ id: _id });
+    var obj = new Venue({ "_id": id });
     
-    $httpBackend.expectPUT('/venue/' + _id, { "id": _id }).respond();
+    $httpBackend.expectPUT('/venue/' + id, { "_id": id }).respond();
     obj.$update();
     $httpBackend.flush();
   });
 
   it('should delete venue', function() {
-    $httpBackend.expectDELETE('/venue/' +  _id).respond();
-    Venue.delete({ id: _id });
+    $httpBackend.expectDELETE('/venue/' +  id).respond();
+    Venue.delete({ "id": id });
     $httpBackend.flush();
   });
 });
