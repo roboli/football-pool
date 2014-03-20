@@ -78,5 +78,17 @@ describe('Admin', function() {
       expect(element(by.binding('venue.location')).getText()).toBe('Rio de Janeiro');
       expect(element(by.binding('venue.capacity')).getText()).toBe('98000');
     });
+
+    it('should cancel an edition', function() {
+      element(by.css("a[href='#/venues']")).click();
+      element.all(by.css("a")).last().click();
+      element(by.buttonText('Edit')).click();
+      element(by.buttonText('Cancel')).click();
+      expect(element(by.tagName('form')).isPresent()).toBe(false);
+      
+      expect(element(by.binding('venue.name')).isPresent()).toBe(true);
+      expect(element(by.binding('venue.location')).isPresent()).toBe(true);
+      expect(element(by.binding('venue.capacity')).isPresent()).toBe(true);
+    });
   });
 });
