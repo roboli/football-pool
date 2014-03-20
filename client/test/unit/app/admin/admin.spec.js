@@ -87,6 +87,15 @@ describe('Admin', function() {
       expect(scope.venue._id).toBe(id);
     }));
 
+    it('should navigate back to the venues list', inject(function($controller) {
+      var location = jasmine.createSpyObj('location', ['path']);
+      $controller('VenueViewCtrl', { $scope: scope, $location: location });
+      $httpBackend.whenGET('/venue/' + id).respond({ "_id": id });
+      $httpBackend.flush();
+      scope.close();
+      expect(location.path).toHaveBeenCalledWith('/venues');
+    }));
+
     it('should navigate to the edit form', inject(function($controller) {
       var location = jasmine.createSpyObj('location', ['path']);
       $controller('VenueViewCtrl', { $scope: scope, $location: location });
