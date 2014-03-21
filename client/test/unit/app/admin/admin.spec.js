@@ -103,6 +103,16 @@ describe('Admin', function() {
       scope.edit(scope.venue);
       expect(location.path).toHaveBeenCalledWith('/venues/' + id + '/edit');
     }));
+
+    it('should delete a venue', inject(function($controller) {
+      $controller('VenueViewCtrl', { $scope: scope, $location: location });
+      $httpBackend.whenGET('/venue/' + id).respond({ "_id": id });
+      $httpBackend.flush();
+      $httpBackend.expectDELETE('/venue/' + id).respond();
+      scope.delete(scope.venue);
+      $httpBackend.flush();
+      expect(location.path).toHaveBeenCalledWith('/venues');
+    }));
   });
 
   describe('VenueEditCtrl', function() {

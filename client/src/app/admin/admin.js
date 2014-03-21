@@ -62,6 +62,12 @@ angular.module('admin', ['ngRoute', 'resources.tournament', 'resources.venue'])
   $scope.close = function() {
     $location.path('/venues');
   };
+
+  $scope.delete = function(venue) {
+    venue.$delete(function() {
+      $location.path('/venues');
+    });
+  };
 }])
 
 .controller('VenueEditCtrl', ['$scope', '$location', '$routeParams', 'Venue', function($scope, $location, $routeParams, Venue) {
