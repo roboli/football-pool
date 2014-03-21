@@ -97,5 +97,18 @@ describe('Admin', function() {
       expect(element(by.binding('venue.location')).isPresent()).toBe(true);
       expect(element(by.binding('venue.capacity')).isPresent()).toBe(true);
     });
+
+    it('should delete venue', function() {
+      element(by.css("a[href='#/venues']")).click();
+      var first_count = element.all(by.repeater('venue in venues')).count();
+      
+      element.all(by.css("a")).last().click();
+      element(by.buttonText('Delete')).click();
+      element.all(by.repeater('venue in venues')).count().then(function(count) {
+	first_count.then(function(fc) {
+	  expect(count).toEqual(fc - 1);
+	});
+      });
+    });
   });
 });
