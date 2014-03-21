@@ -36,8 +36,10 @@ describe('Venue Resource', function() {
   });
 
   it('should delete venue', function() {
+    var obj = new Venue({ "_id": id });
+    
     $httpBackend.expectDELETE('/venue/' +  id).respond();
-    Venue.delete({ "id": id });
+    obj.$delete();
     $httpBackend.flush();
   });
 });
