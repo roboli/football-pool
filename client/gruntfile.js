@@ -19,10 +19,14 @@ module.exports = function(grunt) {
       html: ['src/index.html'],
       tpl: ['src/**/*.tpl.html']
     },
+    components: 'bower_components/',
     clean: ['<%= distdir %>/*'],
     copy: {
       templates: {
         files: [{ dest: '<%= distdir %>/templates', src : '<%= src.tpl %>', flatten: true, expand: true }]
+      },
+      styles: {
+        files: [{ dest: '<%= distdir %>/', src : '<%= components %>/bootstrap/dist/css/bootstrap.css', flatten: true, expand: true }]
       }
     },
     concat: {
@@ -41,8 +45,12 @@ module.exports = function(grunt) {
         }
       },
       angular: {
-        src:['bower_components/angular/angular.js', 'bower_components/angular-route/angular-route.js', 'bower_components/angular-resource/angular-resource.js'],
+        src:['<%= components %>/angular/angular.js', '<%= components %>/angular-route/angular-route.js', '<%= components %>/angular-resource/angular-resource.js'],
         dest: '<%= distdir %>/angular.js'
+      },
+      bootstrap: {
+        src:['<%= components %>/angular-bootstrap/ui-bootstrap.js', '<%= components %>/angular-bootstrap/ui-bootstrap-tpls.js'],
+        dest: '<%= distdir %>/bootstrap.js'
       }
     },
     jshint: {
