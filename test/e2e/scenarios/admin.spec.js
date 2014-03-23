@@ -104,6 +104,7 @@ describe('Admin', function() {
       
       element.all(by.css("a")).last().click();
       element(by.buttonText('Delete')).click();
+      element(by.buttonText('Ok')).click();
       element.all(by.repeater('venue in venues')).count().then(function(count) {
 	first_count.then(function(fc) {
 	  expect(count).toEqual(fc - 1);
