@@ -1,4 +1,4 @@
-angular.module('admin', ['ngRoute', 'resources.tournament', 'resources.venue'])
+angular.module('admin', ['ngRoute', 'services.confirm', 'resources.tournament', 'resources.venue'])
 
 .config(['$routeProvider', function($routeProvider) {
   $routeProvider
@@ -52,7 +52,7 @@ angular.module('admin', ['ngRoute', 'resources.tournament', 'resources.venue'])
   };
 }])
 
-.controller('VenueViewCtrl', ['$scope', '$routeParams', '$location', 'Venue', function($scope, $routeParams, $location, Venue) {
+.controller('VenueViewCtrl', ['$scope', '$routeParams', '$location', '$modal', 'confirm', 'Venue', function($scope, $routeParams, $location, $modal, confirm, Venue) {
   $scope.venue = Venue.get({ id: $routeParams.id });
 
   $scope.edit = function(venue) {
@@ -66,6 +66,12 @@ angular.module('admin', ['ngRoute', 'resources.tournament', 'resources.venue'])
   $scope.delete = function(venue) {
     venue.$delete(function() {
       $location.path('/venues');
+    });
+  };
+
+  $scope.confirmDelete = function() {
+    confirm.open('Are you sure?', function() {
+      $scope.delete($scope.venue);
     });
   };
 }])
@@ -83,4 +89,3 @@ angular.module('admin', ['ngRoute', 'resources.tournament', 'resources.venue'])
     $location.path('/venues/' + venue._id);
   };
 }]);
-
